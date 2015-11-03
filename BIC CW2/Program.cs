@@ -4,12 +4,12 @@
     {
         static void Main(string[] args)
         {
-            MLP mlp = new MLP("1in_cubic");
-            MLP mlp0B = new MLP("1in_linear");
-            MLP mlp1 = new MLP("1in_sine");
-            MLP mlp2 = new MLP("1in_tanh");
-            MLP mlp3 = new MLP("2in_complex");
-            MLP mlp4 = new MLP("2in_xor");
+            MLP mlp = new MLP("1in_cubic", -5, 5);
+            MLP mlp0B = new MLP("1in_linear", -5, 5);
+            MLP mlp1 = new MLP("1in_sine", -5, 5);
+            MLP mlp2 = new MLP("1in_tanh", -5, 5);
+            MLP mlp3 = new MLP("2in_complex", -5, 5);
+            MLP mlp4 = new MLP("2in_xor", -5, 5);
         }
     }
 }
