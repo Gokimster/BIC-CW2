@@ -12,6 +12,9 @@ namespace BIC_CW2
         private int MIN_WEIGHT_INTERVAL = -5;
         private int MAX_WEIGHT_INTERVAL = 5;
         private int HIDDEN_NODES_NO = 5;
+        private int INPUT_NO;
+        private double LEARNING_CONSTANT = 0.05;
+        private double MOMENTUM = 0.5;
         private enum Activation {nullA, sigmoid, tangent, cos, gaussian};
         private Activation activation;
         private Random rand = new Random();
@@ -21,12 +24,13 @@ namespace BIC_CW2
             nodes = new List<Node>();
             for(int i = 0; i < HIDDEN_NODES_NO; i++)
             {
-                nodes.Add(new Node(randomWeight()));
+                nodes.Add(new Node(randomWeights(inputs.Count), INPUT_NO));
             }
         }
         public void initInput(int inputNo, String file)
         {
             inputs = new List<Input>();
+            INPUT_NO = inputNo;
             using (FileStream reader = File.OpenRead(file))
             using (TextFieldParser parser = new TextFieldParser(reader))
             {
@@ -34,6 +38,7 @@ namespace BIC_CW2
                 //different delimiters to work with varying formatting of the files
                 parser.Delimiters = new[] {"         ","\t", "    ", "   ", " " };
                 parser.HasFieldsEnclosedInQuotes = true;
+                Input inp = new Input();
                 while (!parser.EndOfData)
                 {
                     String[] line = parser.ReadFields();
@@ -45,15 +50,19 @@ namespace BIC_CW2
                             line[i] = line[i + 1];
                         }
                     }
-                    if (inputNo == 1)
+                    if (INPUT_NO == 1)
                     {
-                        inputs.Add(new Input(Convert.ToDouble(line[0]), randomWeights(), Convert.ToDouble(line[1])));
+                        inp = new Input(Convert.ToDouble(line[0]), Convert.ToDouble(line[1]));
+                        inputs.Add(inp);
                     }
                     else
                     {
-                        inputs.Add(new Input(Convert.ToDouble(line[0]), Convert.ToDouble(line[1]), randomWeights(), Convert.ToDouble(line[2])));
+                        inp = new Input(Convert.ToDouble(line[0]), Convert.ToDouble(line[1]), Convert.ToDouble(line[2]));
+                        inputs.Add(inp);
                     }
                 }
+                inp.setWeights(randomWeights(HIDDEN_NODES_NO));
+                inp.initWeightChanges(HIDDEN_NODES_NO);
                 Console.WriteLine("Got Inputs");
             }
         }
@@ -63,11 +72,92 @@ namespace BIC_CW2
             initWeightIntervals(minWeight, maxWeight);
             initInput(1, "..\\..\\"+file+".txt");
             initNodes();
+            activation = Activation.tangent;
+            run(1000, 50);
+            Console.WriteLine("done");
         }
 
-        private double deltaWeight(double learningRate, double predictedO, double desiredO, double input)
+        //---------MAIN LOOP-------------------//
+
+        private void run(int popSize, int iterations)
         {
-            return learningRate * (predictedO - desiredO) * input;
+            for(int i = 0; i < iterations; i ++)
+            {
+                for(int j = 0; (j<inputs.Count && j < popSize); j++)
+                {
+                    setNodeOutputs(j);
+                    setOutput(j);
+
+                    setOutputError(j);
+                    setNodeErrors(j);
+
+                    changeOutputWeights(j);
+                    changeInputWeights(j);
+                    Console.WriteLine(inputs[j].error);
+
+                }
+            }
+        }
+        //----------CALCULATE OUTPUTS----------//
+        private void setNodeOutputs(int input)
+        {
+            foreach (Node n in nodes)
+            {
+                double sum = 0;
+                for (int i = 0; i < INPUT_NO; i++)
+                {
+                    sum += n.weights[i] * inputs[input].input[i];
+                }
+                n.output = activationFunction(sum);
+            }
+        }
+
+        private void setOutput(int input)
+        {
+            double sum = 0;
+            for(int i = 0; i< HIDDEN_NODES_NO; i++)
+            {
+                sum += inputs[input].getWeight(i) * nodes[i].output;
+            }
+            inputs[input].output = activationFunction(sum);
+        }
+
+        //-----------ERROR--------------//
+
+        private void setOutputError(int input)
+        {
+            inputs[input].error = ((activationFunction(inputs[input].expectedOutput) - inputs[input].output) * inputs[input].output * (1 - inputs[input].output));
+        }
+
+        private void setNodeErrors(int input)
+        {
+            for(int i = 0; i < HIDDEN_NODES_NO; i++)
+            {
+                nodes[i].error = (inputs[input].error * inputs[input].getWeight(i)) * nodes[i].output * (1 - nodes[i].output);
+            }
+        }
+        //----------WEIGHT CHANGES-----///
+
+        private void changeInputWeights(int input)
+        {
+            for (int i = 0; i < HIDDEN_NODES_NO; i++)
+            {
+                for (int j = 0; j < INPUT_NO; j++)
+                {
+                    nodes[i].weightChanges[j] = LEARNING_CONSTANT * nodes[i].error * nodes[i].output + MOMENTUM * nodes[i].weightChanges[j];
+                    nodes[i].weights[j] += nodes[i].weightChanges[j];
+                }
+            }
+        }
+
+        private void changeOutputWeights(int input)
+        {
+            for (int i = 0; i < HIDDEN_NODES_NO; i++)
+            {
+                Input temp = inputs[input];
+                temp.setWeightChange(i, LEARNING_CONSTANT * temp.error * temp.output + MOMENTUM * temp.getWeightChange(i));
+                temp.setWeight(i, temp.getWeight(i) + temp.getWeightChange(i));
+            }
         }
 
         //------------WEIGHTS----------//
@@ -87,10 +177,10 @@ namespace BIC_CW2
             }
         }
 
-       private double[] randomWeights()
+       private double[] randomWeights(int size)
         {
-            double [] w = new double[HIDDEN_NODES_NO];
-            for (int i = 0; i < HIDDEN_NODES_NO; i++)
+            double [] w = new double[size];
+            for (int i = 0; i < size; i++)
             {
                 w[i] = randomWeight();
             }

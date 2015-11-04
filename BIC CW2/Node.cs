@@ -8,11 +8,16 @@ namespace BIC_CW2
 {
     public class Node
     {
-        public double weight { get; set; }
+        public double[] weights { get; set; }
+        public double output { get; set; }
+        public double error { get; set; }
+        public double[] weightChanges { get; set; }
 
-        public Node(double weight)
+        public Node(double[] weights, int noOfInputs)
         {
-            this.weight = weight;
+            this.weights = weights;
+            weightChanges = new double[noOfInputs];
         }
+
     }
 }
