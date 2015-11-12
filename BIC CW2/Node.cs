@@ -11,6 +11,7 @@ namespace BIC_CW2
         public double[] weights { get; set; }
         public double output { get; set; }
         public double error { get; set; }
+        public double result { get; set; }
         public double[] weightChanges { get; set; }
 
         public Node(double[] weights, int noOfInputs)

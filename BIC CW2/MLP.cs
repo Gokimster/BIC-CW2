@@ -24,7 +24,7 @@ namespace BIC_CW2
             nodes = new List<Node>();
             for(int i = 0; i < HIDDEN_NODES_NO; i++)
             {
-                nodes.Add(new Node(randomWeights(inputs.Count), INPUT_NO));
+                nodes.Add(new Node(randomWeights(INPUT_NO), INPUT_NO));
             }
         }
         public void initInput(int inputNo, String file)
@@ -72,8 +72,8 @@ namespace BIC_CW2
             initWeightIntervals(minWeight, maxWeight);
             initInput(1, "..\\..\\"+file+".txt");
             initNodes();
-            activation = Activation.tangent;
-            run(1000, 50);
+            activation = Activation.gaussian;
+            run(1000, 200);
             Console.WriteLine("done");
         }
 
@@ -83,6 +83,7 @@ namespace BIC_CW2
         {
             for(int i = 0; i < iterations; i ++)
             {
+                bool done = true;
                 for(int j = 0; (j<inputs.Count && j < popSize); j++)
                 {
                     setNodeOutputs(j);
@@ -93,8 +94,17 @@ namespace BIC_CW2
 
                     changeOutputWeights(j);
                     changeInputWeights(j);
-                    Console.WriteLine(inputs[j].error);
+                    //Console.WriteLine(inputs[j].error);
+                    if (Math.Abs(inputs[j].error) > 0.01)
+                    {
+                        done = false;
+                    }
+                }
 
+                Console.WriteLine(meanSquaredError(popSize));
+                if (done)
+                {
+                    break;
                 }
             }
         }
@@ -108,6 +118,7 @@ namespace BIC_CW2
                 {
                     sum += n.weights[i] * inputs[input].input[i];
                 }
+                n.result = sum;
                 n.output = activationFunction(sum);
             }
         }
@@ -120,20 +131,21 @@ namespace BIC_CW2
                 sum += inputs[input].getWeight(i) * nodes[i].output;
             }
             inputs[input].output = activationFunction(sum);
+            inputs[input].result = sum;
         }
 
         //-----------ERROR--------------//
 
         private void setOutputError(int input)
         {
-            inputs[input].error = ((activationFunction(inputs[input].expectedOutput) - inputs[input].output) * inputs[input].output * (1 - inputs[input].output));
+            inputs[input].error = (inputs[input].expectedOutput - inputs[input].output) * derivFunction(inputs[input].result);
         }
 
         private void setNodeErrors(int input)
         {
             for(int i = 0; i < HIDDEN_NODES_NO; i++)
             {
-                nodes[i].error = (inputs[input].error * inputs[input].getWeight(i)) * nodes[i].output * (1 - nodes[i].output);
+                nodes[i].error = (inputs[input].error * inputs[input].getWeight(i)) * derivFunction(nodes[i].result);
             }
         }
         //----------WEIGHT CHANGES-----///
@@ -144,7 +156,7 @@ namespace BIC_CW2
             {
                 for (int j = 0; j < INPUT_NO; j++)
                 {
-                    nodes[i].weightChanges[j] = LEARNING_CONSTANT * nodes[i].error * nodes[i].output + MOMENTUM * nodes[i].weightChanges[j];
+                    nodes[i].weightChanges[j] = LEARNING_CONSTANT * nodes[i].error * inputs[input].input[j];
                     nodes[i].weights[j] += nodes[i].weightChanges[j];
                 }
             }
@@ -155,7 +167,7 @@ namespace BIC_CW2
             for (int i = 0; i < HIDDEN_NODES_NO; i++)
             {
                 Input temp = inputs[input];
-                temp.setWeightChange(i, LEARNING_CONSTANT * temp.error * temp.output + MOMENTUM * temp.getWeightChange(i));
+                temp.setWeightChange(i, LEARNING_CONSTANT * temp.error * nodes[i].result);
                 temp.setWeight(i, temp.getWeight(i) + temp.getWeightChange(i));
             }
         }
@@ -213,7 +225,32 @@ namespace BIC_CW2
 
         }
 
+        private double derivFunction(double x)
+        {
+            switch (activation)
+            {
+                case Activation.nullA:
+                    return nullDeriv(x);
+                case Activation.sigmoid:
+                    return sigmoidDeriv(x);
+                case Activation.tangent:
+                    return tangentDeriv(x);
+                case Activation.cos:
+                    return cosineDeriv(x);
+                case Activation.gaussian:
+                    return gaussianDeriv(x);
+                default:
+                    return 0;
+            }
+
+        }
+
         private double nullActivation(double x)
+        {
+            return 0;
+        }
+
+        private double nullDeriv(double x)
         {
             return 0;
         }
@@ -223,9 +260,19 @@ namespace BIC_CW2
             return (1 / (1 + Math.Exp(-x)));
         }
 
+        private double sigmoidDeriv(double x)
+        {
+            return sigmoidActivation(x) * (1 - sigmoidActivation(x));
+        }
+
         private double tangentActivation(double x)
         {
             return Math.Tanh(x);
+        }
+
+        private double tangentDeriv(double x)
+        {
+            return 1 - (Math.Tanh(x) * Math.Tanh(x));
         }
 
         private double cosineActivation(double x)
@@ -233,9 +280,33 @@ namespace BIC_CW2
             return Math.Cos(x);
         }
 
+        private double cosineDeriv(double x)
+        {
+            return -Math.Sin(x);
+        }
+
         private double gaussianActivation(double x)
         {
             return Math.Exp(-(x * x / 2));
+        }
+
+        private double gaussianDeriv(double x)
+        {
+            return Math.Exp(-(x * x / 2));
+        }
+
+        private double meanSquaredError(int popSize)
+        {
+            double sum = 0;
+            for (int j = 0; (j < inputs.Count && j < popSize); j++)
+            {
+                sum += Math.Pow(activationFunction(inputs[j].expectedOutput) - inputs[j].output, 2);
+            }
+            if (inputs.Count >= popSize)
+            {
+                return sum / inputs.Count;
+            }
+            else return sum / popSize;
         }
     }
 }
