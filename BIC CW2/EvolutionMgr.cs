@@ -56,10 +56,30 @@ namespace BIC_CW2
                 int i = 0;
                 foreach (MLP mlp in mlps)
                 {
-                    mlp.run(10);
+                    mlp.run(50);
                     fitness[i++] = mlp.meanSquaredError();
-                    Console.WriteLine(mlp.meanSquaredError());
+                    //Console.WriteLine(mlp.meanSquaredError());
                     mlp.resetMLP();
+                }
+                bool converged = true;
+                double minSquaredError = 9999;
+                foreach(double error in fitness)
+                {
+                    if (error < minSquaredError)
+                    {
+                        minSquaredError = error;
+                    }
+                    if (error != fitness[0])
+                    {
+                        converged = false;
+                    }
+                }
+                Console.WriteLine(minSquaredError);
+
+                if (converged)
+                {
+                    Console.WriteLine("CONVERGED after :" +iteration+ " iterations");
+                    break;
                 }
                 //get the top and bottom population
                 List<KeyValuePair<double, MLP>> evolvingMLP = new List<KeyValuePair<double, MLP>>();
