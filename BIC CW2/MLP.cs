@@ -7,17 +7,21 @@ namespace BIC_CW2
 {
     public class MLP
     {
-        List<Input> inputs;
-        List<Node> nodes;
+        public List<Input> inputs { get; set; }
+        public List<Node> nodes { get; set; }
+        double[] initialWeights;
+        double[,] initialNodeWeights;
         private int MIN_WEIGHT_INTERVAL = -5;
         private int MAX_WEIGHT_INTERVAL = 5;
         private int HIDDEN_NODES_NO = 5;
         private int INPUT_NO;
         private double LEARNING_CONSTANT = 0.05;
-        private double MOMENTUM = 0.5;
         private enum Activation {nullA, sigmoid, tangent, cos, gaussian};
         private Activation activation;
         private Random rand = new Random();
+        //the weights
+        public double[] weights;
+        public double[] weightChanges;
 
         public void initNodes()
         {
@@ -26,6 +30,7 @@ namespace BIC_CW2
             {
                 nodes.Add(new Node(randomWeights(INPUT_NO), INPUT_NO));
             }
+            initialNodeWeights = new double[nodes.Count, nodes[0].weights.Length];
         }
         public void initInput(int inputNo, String file)
         {
@@ -61,8 +66,9 @@ namespace BIC_CW2
                         inputs.Add(inp);
                     }
                 }
-                inp.setWeights(randomWeights(HIDDEN_NODES_NO));
-                inp.initWeightChanges(HIDDEN_NODES_NO);
+                setWeights(randomWeights(HIDDEN_NODES_NO));
+                initialWeights = new double[weights.Length];
+                initWeightChanges(HIDDEN_NODES_NO);
                 Console.WriteLine("Got Inputs");
             }
         }
@@ -72,19 +78,30 @@ namespace BIC_CW2
             initWeightIntervals(minWeight, maxWeight);
             initInput(1, "..\\..\\"+file+".txt");
             initNodes();
-            activation = Activation.gaussian;
-            run(1000, 200);
+            activation = Activation.sigmoid;
+            //run(1000, 50);
             Console.WriteLine("done");
         }
 
         //---------MAIN LOOP-------------------//
 
-        private void run(int popSize, int iterations)
+        public void run(int iterations)
         {
+            for(int i = 0; i < weights.Length; i++)
+            {
+                initialWeights[i] = weights[i];
+            }
+            for(int i = 0; i < nodes.Count; i++)
+            {
+                for(int j = 0; j< nodes[i].weights.Length; j++)
+                {
+                    initialNodeWeights[i, j] = nodes[i].weights[j];
+                }
+            }
             for(int i = 0; i < iterations; i ++)
             {
                 bool done = true;
-                for(int j = 0; (j<inputs.Count && j < popSize); j++)
+                for(int j = 0; (j<inputs.Count); j++)
                 {
                     setNodeOutputs(j);
                     setOutput(j);
@@ -101,11 +118,38 @@ namespace BIC_CW2
                     }
                 }
 
-                Console.WriteLine(meanSquaredError(popSize));
+                //Console.WriteLine(meanSquaredError(popSize));
                 if (done)
                 {
                     break;
                 }
+            }
+        }
+
+        public void resetMLP()
+        {
+            for (int i = 0; i < weights.Length; i++)
+            {
+                weights[i] = initialWeights[i];
+            }
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                for (int j = 0; j < nodes[i].weights.Length; j++)
+                {
+                    nodes[i].weights[j] = initialNodeWeights[i, j];
+                }
+            }
+        }
+
+        private void runEpochNoWeightAdjustment()
+        {
+            for (int j = 0; (j < inputs.Count); j++)
+            {
+                setNodeOutputs(j);
+                setOutput(j);
+
+                setOutputError(j);
+                setNodeErrors(j);
             }
         }
         //----------CALCULATE OUTPUTS----------//
@@ -128,7 +172,7 @@ namespace BIC_CW2
             double sum = 0;
             for(int i = 0; i< HIDDEN_NODES_NO; i++)
             {
-                sum += inputs[input].getWeight(i) * nodes[i].output;
+                sum += getWeight(i) * nodes[i].output;
             }
             inputs[input].output = activationFunction(sum);
             inputs[input].result = sum;
@@ -145,7 +189,7 @@ namespace BIC_CW2
         {
             for(int i = 0; i < HIDDEN_NODES_NO; i++)
             {
-                nodes[i].error = (inputs[input].error * inputs[input].getWeight(i)) * derivFunction(nodes[i].result);
+                nodes[i].error = (inputs[input].error * getWeight(i)) * derivFunction(nodes[i].result);
             }
         }
         //----------WEIGHT CHANGES-----///
@@ -167,8 +211,8 @@ namespace BIC_CW2
             for (int i = 0; i < HIDDEN_NODES_NO; i++)
             {
                 Input temp = inputs[input];
-                temp.setWeightChange(i, LEARNING_CONSTANT * temp.error * nodes[i].result);
-                temp.setWeight(i, temp.getWeight(i) + temp.getWeightChange(i));
+                setWeightChange(i, LEARNING_CONSTANT * temp.error * nodes[i].result);
+                setWeight(i, getWeight(i) + getWeightChange(i));
             }
         }
 
@@ -204,6 +248,81 @@ namespace BIC_CW2
             return rand.NextDouble() + rand.Next(MIN_WEIGHT_INTERVAL, MAX_WEIGHT_INTERVAL - 1);
         }
 
+        public void mutateWeights()
+        {
+            foreach(Node n in nodes)
+            {
+                for(int i = 0; i < n.weights.Length; i++)
+                {
+                    int sign = rand.Next(2);
+                    if (sign < 1)
+                    {
+                        n.weights[i] -= (rand.NextDouble() / 10);
+                    }
+                    else
+                    {
+                        n.weights[i] += (rand.NextDouble() / 10);
+                    }
+                }
+            }
+
+            for(int i = 0; i< getWeights().Length;i++)
+            {
+                int sign = rand.Next(2);
+                if (sign < 1)
+                {
+                    setWeight(i, getWeight(i) - (rand.NextDouble() / 10));
+                }
+                else
+                {
+                    setWeight(i, getWeight(i) + (rand.NextDouble() / 10));
+                }
+            }
+        }
+
+        public void setWeights(double[] w)
+        {
+            weights = new double[w.Length];
+            for (int i = 0; i < w.Length; i++)
+            {
+                weights[i] = w[i];
+            }
+        }
+
+        public void setWeight(int i, double w)
+        {
+            weights[i] = w;
+        }
+
+        public double getWeight(int i)
+        {
+            return weights[i];
+        }
+
+        public double[] getWeights()
+        {
+            return weights;
+        }
+
+        public void initWeightChanges(int noOfHidden)
+        {
+            weightChanges = new double[noOfHidden];
+        }
+
+        public void setWeightChange(double[] weightChange)
+        {
+            weightChanges = weightChange;
+        }
+
+        public void setWeightChange(int i, double weightChange)
+        {
+            weightChanges[i] = weightChange;
+        }
+
+        public double getWeightChange(int i)
+        {
+            return weightChanges[i];
+        }
         //-----ACTIVATION FUNCTION----//
         private double activationFunction(double x)
         {
@@ -307,6 +426,16 @@ namespace BIC_CW2
                 return sum / inputs.Count;
             }
             else return sum / popSize;
+        }
+
+        public double meanSquaredError()
+        {
+            double sum = 0;
+            for (int j = 0; (j < inputs.Count); j++)
+            {
+                sum += Math.Pow(activationFunction(inputs[j].expectedOutput) - inputs[j].output, 2);
+            }
+            return sum / inputs.Count;
         }
     }
 }
