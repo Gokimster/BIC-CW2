@@ -33,30 +33,30 @@
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.meansGraph = new ZedGraph.ZedGraphControl();
             this.paramsInputContainer = new System.Windows.Forms.Panel();
+            this.submit_btn = new System.Windows.Forms.Button();
+            this.input_weight_max = new System.Windows.Forms.TextBox();
+            this.input_weight_min = new System.Windows.Forms.TextBox();
+            this.label_max = new System.Windows.Forms.Label();
+            this.label_min = new System.Windows.Forms.Label();
+            this.label_weightInterval = new System.Windows.Forms.Label();
+            this.input_crossoverRate = new System.Windows.Forms.TextBox();
+            this.label_crossoverrate = new System.Windows.Forms.Label();
+            this.input_mutationrate = new System.Windows.Forms.TextBox();
+            this.label_mutationrate = new System.Windows.Forms.Label();
+            this.input_numofiterations = new System.Windows.Forms.TextBox();
+            this.label_numberofinterations = new System.Windows.Forms.Label();
+            this.input_popsize = new System.Windows.Forms.TextBox();
+            this.label_popsize = new System.Windows.Forms.Label();
+            this.checked_activationfn = new System.Windows.Forms.CheckBox();
+            this.checked_weights = new System.Windows.Forms.CheckBox();
+            this.label_tickboxes = new System.Windows.Forms.Label();
+            this.label_selectRadio = new System.Windows.Forms.Label();
             this.fn_complexradio = new System.Windows.Forms.RadioButton();
             this.radfn_xorradio = new System.Windows.Forms.RadioButton();
             this.fn_tanhradio = new System.Windows.Forms.RadioButton();
             this.fn_sineradio = new System.Windows.Forms.RadioButton();
             this.fn_cubicradio = new System.Windows.Forms.RadioButton();
             this.fn_linearradio = new System.Windows.Forms.RadioButton();
-            this.label_selectRadio = new System.Windows.Forms.Label();
-            this.label_tickboxes = new System.Windows.Forms.Label();
-            this.checked_weights = new System.Windows.Forms.CheckBox();
-            this.checked_activationfn = new System.Windows.Forms.CheckBox();
-            this.label_popsize = new System.Windows.Forms.Label();
-            this.input_popsize = new System.Windows.Forms.TextBox();
-            this.label_numberofinterations = new System.Windows.Forms.Label();
-            this.input_numofiterations = new System.Windows.Forms.TextBox();
-            this.label_mutationrate = new System.Windows.Forms.Label();
-            this.input_mutationrate = new System.Windows.Forms.TextBox();
-            this.label_crossoverrate = new System.Windows.Forms.Label();
-            this.input_crossoverRate = new System.Windows.Forms.TextBox();
-            this.label_weightInterval = new System.Windows.Forms.Label();
-            this.label_min = new System.Windows.Forms.Label();
-            this.label_max = new System.Windows.Forms.Label();
-            this.input_weight_min = new System.Windows.Forms.TextBox();
-            this.input_weight_max = new System.Windows.Forms.TextBox();
-            this.submit_btn = new System.Windows.Forms.Button();
             this.paramsInputContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,6 +130,181 @@
             this.paramsInputContainer.Name = "paramsInputContainer";
             this.paramsInputContainer.Size = new System.Drawing.Size(254, 586);
             this.paramsInputContainer.TabIndex = 2;
+            // 
+            // submit_btn
+            // 
+            this.submit_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submit_btn.Location = new System.Drawing.Point(72, 547);
+            this.submit_btn.Name = "submit_btn";
+            this.submit_btn.Size = new System.Drawing.Size(140, 27);
+            this.submit_btn.TabIndex = 23;
+            this.submit_btn.Text = "SUBMIT";
+            this.submit_btn.UseVisualStyleBackColor = true;
+            this.submit_btn.Click += new System.EventHandler(this.submit_btn_Click);
+            // 
+            // input_weight_max
+            // 
+            this.input_weight_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_weight_max.Location = new System.Drawing.Point(109, 501);
+            this.input_weight_max.Name = "input_weight_max";
+            this.input_weight_max.Size = new System.Drawing.Size(49, 22);
+            this.input_weight_max.TabIndex = 22;
+            this.input_weight_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // input_weight_min
+            // 
+            this.input_weight_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_weight_min.Location = new System.Drawing.Point(109, 477);
+            this.input_weight_min.Name = "input_weight_min";
+            this.input_weight_min.Size = new System.Drawing.Size(49, 22);
+            this.input_weight_min.TabIndex = 21;
+            this.input_weight_min.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_max
+            // 
+            this.label_max.AutoSize = true;
+            this.label_max.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_max.Location = new System.Drawing.Point(64, 501);
+            this.label_max.Name = "label_max";
+            this.label_max.Size = new System.Drawing.Size(39, 21);
+            this.label_max.TabIndex = 20;
+            this.label_max.Text = "max";
+            // 
+            // label_min
+            // 
+            this.label_min.AutoSize = true;
+            this.label_min.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_min.Location = new System.Drawing.Point(65, 477);
+            this.label_min.Name = "label_min";
+            this.label_min.Size = new System.Drawing.Size(38, 21);
+            this.label_min.TabIndex = 19;
+            this.label_min.Text = "min";
+            // 
+            // label_weightInterval
+            // 
+            this.label_weightInterval.AutoSize = true;
+            this.label_weightInterval.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_weightInterval.Location = new System.Drawing.Point(33, 447);
+            this.label_weightInterval.Name = "label_weightInterval";
+            this.label_weightInterval.Size = new System.Drawing.Size(125, 22);
+            this.label_weightInterval.TabIndex = 18;
+            this.label_weightInterval.Text = "Weight interval";
+            // 
+            // input_crossoverRate
+            // 
+            this.input_crossoverRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_crossoverRate.Location = new System.Drawing.Point(168, 400);
+            this.input_crossoverRate.Name = "input_crossoverRate";
+            this.input_crossoverRate.Size = new System.Drawing.Size(71, 22);
+            this.input_crossoverRate.TabIndex = 17;
+            this.input_crossoverRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_crossoverrate
+            // 
+            this.label_crossoverrate.AutoSize = true;
+            this.label_crossoverrate.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_crossoverrate.Location = new System.Drawing.Point(13, 399);
+            this.label_crossoverrate.Name = "label_crossoverrate";
+            this.label_crossoverrate.Size = new System.Drawing.Size(122, 22);
+            this.label_crossoverrate.TabIndex = 16;
+            this.label_crossoverrate.Text = "Crossover rate:";
+            // 
+            // input_mutationrate
+            // 
+            this.input_mutationrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_mutationrate.Location = new System.Drawing.Point(168, 368);
+            this.input_mutationrate.Name = "input_mutationrate";
+            this.input_mutationrate.Size = new System.Drawing.Size(71, 22);
+            this.input_mutationrate.TabIndex = 15;
+            this.input_mutationrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_mutationrate
+            // 
+            this.label_mutationrate.AutoSize = true;
+            this.label_mutationrate.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_mutationrate.Location = new System.Drawing.Point(12, 368);
+            this.label_mutationrate.Name = "label_mutationrate";
+            this.label_mutationrate.Size = new System.Drawing.Size(117, 22);
+            this.label_mutationrate.TabIndex = 14;
+            this.label_mutationrate.Text = "Mutation rate:";
+            // 
+            // input_numofiterations
+            // 
+            this.input_numofiterations.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_numofiterations.Location = new System.Drawing.Point(168, 336);
+            this.input_numofiterations.Name = "input_numofiterations";
+            this.input_numofiterations.Size = new System.Drawing.Size(71, 22);
+            this.input_numofiterations.TabIndex = 13;
+            this.input_numofiterations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_numberofinterations
+            // 
+            this.label_numberofinterations.AutoSize = true;
+            this.label_numberofinterations.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_numberofinterations.Location = new System.Drawing.Point(12, 334);
+            this.label_numberofinterations.Name = "label_numberofinterations";
+            this.label_numberofinterations.Size = new System.Drawing.Size(150, 22);
+            this.label_numberofinterations.TabIndex = 12;
+            this.label_numberofinterations.Text = "Num. of iterations:";
+            // 
+            // input_popsize
+            // 
+            this.input_popsize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_popsize.Location = new System.Drawing.Point(168, 301);
+            this.input_popsize.Name = "input_popsize";
+            this.input_popsize.Size = new System.Drawing.Size(71, 22);
+            this.input_popsize.TabIndex = 11;
+            this.input_popsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label_popsize
+            // 
+            this.label_popsize.AutoSize = true;
+            this.label_popsize.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_popsize.Location = new System.Drawing.Point(12, 301);
+            this.label_popsize.Name = "label_popsize";
+            this.label_popsize.Size = new System.Drawing.Size(135, 22);
+            this.label_popsize.TabIndex = 10;
+            this.label_popsize.Text = "Population Size: ";
+            // 
+            // checked_activationfn
+            // 
+            this.checked_activationfn.AutoSize = true;
+            this.checked_activationfn.Location = new System.Drawing.Point(72, 253);
+            this.checked_activationfn.Name = "checked_activationfn";
+            this.checked_activationfn.Size = new System.Drawing.Size(117, 17);
+            this.checked_activationfn.TabIndex = 9;
+            this.checked_activationfn.Text = "Activation Function";
+            this.checked_activationfn.UseVisualStyleBackColor = true;
+            // 
+            // checked_weights
+            // 
+            this.checked_weights.AutoSize = true;
+            this.checked_weights.Location = new System.Drawing.Point(72, 229);
+            this.checked_weights.Name = "checked_weights";
+            this.checked_weights.Size = new System.Drawing.Size(65, 17);
+            this.checked_weights.TabIndex = 8;
+            this.checked_weights.Text = "Weights";
+            this.checked_weights.UseVisualStyleBackColor = true;
+            // 
+            // label_tickboxes
+            // 
+            this.label_tickboxes.AutoSize = true;
+            this.label_tickboxes.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_tickboxes.Location = new System.Drawing.Point(33, 203);
+            this.label_tickboxes.Name = "label_tickboxes";
+            this.label_tickboxes.Size = new System.Drawing.Size(164, 22);
+            this.label_tickboxes.TabIndex = 7;
+            this.label_tickboxes.Text = "Parameters to evolve";
+            // 
+            // label_selectRadio
+            // 
+            this.label_selectRadio.AutoSize = true;
+            this.label_selectRadio.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_selectRadio.Location = new System.Drawing.Point(24, 23);
+            this.label_selectRadio.Name = "label_selectRadio";
+            this.label_selectRadio.Size = new System.Drawing.Size(183, 22);
+            this.label_selectRadio.TabIndex = 6;
+            this.label_selectRadio.Text = "Please select a function:";
             // 
             // fn_complexradio
             // 
@@ -215,182 +390,6 @@
             this.fn_linearradio.TabStop = true;
             this.fn_linearradio.Text = "Linear function";
             this.fn_linearradio.UseVisualStyleBackColor = true;
-            // 
-            // label_selectRadio
-            // 
-            this.label_selectRadio.AutoSize = true;
-            this.label_selectRadio.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_selectRadio.Location = new System.Drawing.Point(24, 23);
-            this.label_selectRadio.Name = "label_selectRadio";
-            this.label_selectRadio.Size = new System.Drawing.Size(183, 22);
-            this.label_selectRadio.TabIndex = 6;
-            this.label_selectRadio.Text = "Please select a function:";
-            this.label_selectRadio.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label_tickboxes
-            // 
-            this.label_tickboxes.AutoSize = true;
-            this.label_tickboxes.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_tickboxes.Location = new System.Drawing.Point(33, 203);
-            this.label_tickboxes.Name = "label_tickboxes";
-            this.label_tickboxes.Size = new System.Drawing.Size(164, 22);
-            this.label_tickboxes.TabIndex = 7;
-            this.label_tickboxes.Text = "Parameters to evolve";
-            this.label_tickboxes.Click += new System.EventHandler(this.label_tickboxes_Click);
-            // 
-            // checked_weights
-            // 
-            this.checked_weights.AutoSize = true;
-            this.checked_weights.Location = new System.Drawing.Point(72, 229);
-            this.checked_weights.Name = "checked_weights";
-            this.checked_weights.Size = new System.Drawing.Size(65, 17);
-            this.checked_weights.TabIndex = 8;
-            this.checked_weights.Text = "Weights";
-            this.checked_weights.UseVisualStyleBackColor = true;
-            // 
-            // checked_activationfn
-            // 
-            this.checked_activationfn.AutoSize = true;
-            this.checked_activationfn.Location = new System.Drawing.Point(72, 253);
-            this.checked_activationfn.Name = "checked_activationfn";
-            this.checked_activationfn.Size = new System.Drawing.Size(117, 17);
-            this.checked_activationfn.TabIndex = 9;
-            this.checked_activationfn.Text = "Activation Function";
-            this.checked_activationfn.UseVisualStyleBackColor = true;
-            // 
-            // label_popsize
-            // 
-            this.label_popsize.AutoSize = true;
-            this.label_popsize.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_popsize.Location = new System.Drawing.Point(12, 301);
-            this.label_popsize.Name = "label_popsize";
-            this.label_popsize.Size = new System.Drawing.Size(135, 22);
-            this.label_popsize.TabIndex = 10;
-            this.label_popsize.Text = "Population Size: ";
-            // 
-            // input_popsize
-            // 
-            this.input_popsize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_popsize.Location = new System.Drawing.Point(168, 301);
-            this.input_popsize.Name = "input_popsize";
-            this.input_popsize.Size = new System.Drawing.Size(71, 22);
-            this.input_popsize.TabIndex = 11;
-            this.input_popsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label_numberofinterations
-            // 
-            this.label_numberofinterations.AutoSize = true;
-            this.label_numberofinterations.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_numberofinterations.Location = new System.Drawing.Point(12, 334);
-            this.label_numberofinterations.Name = "label_numberofinterations";
-            this.label_numberofinterations.Size = new System.Drawing.Size(150, 22);
-            this.label_numberofinterations.TabIndex = 12;
-            this.label_numberofinterations.Text = "Num. of iterations:";
-            // 
-            // input_numofiterations
-            // 
-            this.input_numofiterations.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_numofiterations.Location = new System.Drawing.Point(168, 336);
-            this.input_numofiterations.Name = "input_numofiterations";
-            this.input_numofiterations.Size = new System.Drawing.Size(71, 22);
-            this.input_numofiterations.TabIndex = 13;
-            this.input_numofiterations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label_mutationrate
-            // 
-            this.label_mutationrate.AutoSize = true;
-            this.label_mutationrate.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_mutationrate.Location = new System.Drawing.Point(12, 368);
-            this.label_mutationrate.Name = "label_mutationrate";
-            this.label_mutationrate.Size = new System.Drawing.Size(117, 22);
-            this.label_mutationrate.TabIndex = 14;
-            this.label_mutationrate.Text = "Mutation rate:";
-            // 
-            // input_mutationrate
-            // 
-            this.input_mutationrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_mutationrate.Location = new System.Drawing.Point(168, 368);
-            this.input_mutationrate.Name = "input_mutationrate";
-            this.input_mutationrate.Size = new System.Drawing.Size(71, 22);
-            this.input_mutationrate.TabIndex = 15;
-            this.input_mutationrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label_crossoverrate
-            // 
-            this.label_crossoverrate.AutoSize = true;
-            this.label_crossoverrate.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_crossoverrate.Location = new System.Drawing.Point(13, 399);
-            this.label_crossoverrate.Name = "label_crossoverrate";
-            this.label_crossoverrate.Size = new System.Drawing.Size(122, 22);
-            this.label_crossoverrate.TabIndex = 16;
-            this.label_crossoverrate.Text = "Crossover rate:";
-            // 
-            // input_crossoverRate
-            // 
-            this.input_crossoverRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_crossoverRate.Location = new System.Drawing.Point(168, 400);
-            this.input_crossoverRate.Name = "input_crossoverRate";
-            this.input_crossoverRate.Size = new System.Drawing.Size(71, 22);
-            this.input_crossoverRate.TabIndex = 17;
-            this.input_crossoverRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label_weightInterval
-            // 
-            this.label_weightInterval.AutoSize = true;
-            this.label_weightInterval.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_weightInterval.Location = new System.Drawing.Point(33, 447);
-            this.label_weightInterval.Name = "label_weightInterval";
-            this.label_weightInterval.Size = new System.Drawing.Size(125, 22);
-            this.label_weightInterval.TabIndex = 18;
-            this.label_weightInterval.Text = "Weight interval";
-            // 
-            // label_min
-            // 
-            this.label_min.AutoSize = true;
-            this.label_min.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_min.Location = new System.Drawing.Point(65, 477);
-            this.label_min.Name = "label_min";
-            this.label_min.Size = new System.Drawing.Size(38, 21);
-            this.label_min.TabIndex = 19;
-            this.label_min.Text = "min";
-            // 
-            // label_max
-            // 
-            this.label_max.AutoSize = true;
-            this.label_max.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_max.Location = new System.Drawing.Point(64, 501);
-            this.label_max.Name = "label_max";
-            this.label_max.Size = new System.Drawing.Size(39, 21);
-            this.label_max.TabIndex = 20;
-            this.label_max.Text = "max";
-            // 
-            // input_weight_min
-            // 
-            this.input_weight_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_weight_min.Location = new System.Drawing.Point(109, 477);
-            this.input_weight_min.Name = "input_weight_min";
-            this.input_weight_min.Size = new System.Drawing.Size(49, 22);
-            this.input_weight_min.TabIndex = 21;
-            this.input_weight_min.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // input_weight_max
-            // 
-            this.input_weight_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_weight_max.Location = new System.Drawing.Point(109, 501);
-            this.input_weight_max.Name = "input_weight_max";
-            this.input_weight_max.Size = new System.Drawing.Size(49, 22);
-            this.input_weight_max.TabIndex = 22;
-            this.input_weight_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // submit_btn
-            // 
-            this.submit_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submit_btn.Location = new System.Drawing.Point(72, 547);
-            this.submit_btn.Name = "submit_btn";
-            this.submit_btn.Size = new System.Drawing.Size(140, 27);
-            this.submit_btn.TabIndex = 23;
-            this.submit_btn.Text = "SUBMIT";
-            this.submit_btn.UseVisualStyleBackColor = true;
             // 
             // PerfGraph
             // 

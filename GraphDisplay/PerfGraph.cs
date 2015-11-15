@@ -29,6 +29,15 @@ namespace GraphDisplay
 
 
         String chosenRadio;
+        bool checked_EvolveWeights = false;
+        bool checked_EvolveFunction = false;
+
+        int pop_size;
+        int noOfIterations;
+        double mutRate;
+        double crossoverRate;
+        int min;
+        int max;
 
 
         public PerfGraph()
@@ -48,22 +57,14 @@ namespace GraphDisplay
             meansGraph.GraphPane.Chart.Fill.Brush = new System.Drawing.SolidBrush(Color.AntiqueWhite);
             meansGraph.GraphPane.Fill.Color = Color.FloralWhite;
 
-            plotGraphs();
-        }
-
-        //initial graphs set up 
-        private void plotGraphs()
-        {
             // Set the Titles
             ratesGraph_pane.Title.Text = "Desired vs MLP's output";
             ratesGraph_pane.XAxis.Title.Text = "x";
             ratesGraph_pane.YAxis.Title.Text = "y";
 
-            ratesGraph_pane.Title.Text = "Means Squared Error";
-            ratesGraph_pane.XAxis.Title.Text = "x";
-            ratesGraph_pane.YAxis.Title.Text = "y";
-
-
+            meansGraph_pane.Title.Text = "Means Squared Error";
+            meansGraph_pane.XAxis.Title.Text = "x";
+            meansGraph_pane.YAxis.Title.Text = "y";
 
             desiredOutput_line = ratesGraph_pane.AddCurve("Desired Output",
                   desiredOutput_points, Color.Red, SymbolType.Circle);
@@ -78,7 +79,17 @@ namespace GraphDisplay
             meansGraph.AxisChange();
         }
 
-        private void UpdateTimer_Tick(object sender, EventArgs e)
+        //initial graphs set up 
+        private void plotGraphs()
+        {
+           
+
+
+
+            
+        }
+
+       /* private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             deltaTime += UpdateTimer.Interval / 1000;
             Random rnd = new Random();
@@ -95,21 +106,27 @@ namespace GraphDisplay
             meansGraph.AxisChange();
             meansGraph.Invalidate();
 
-        }
+        }*/
 
         //update graph with new values
-        public void updateGraph(double desired_Output, double mlp_Output, double mse)
+        public void updateRates(double desired_Output, double mlp_Output)
         {
-            desiredOutput_points.Add(deltaTime, desired_Output);
-            mlpOutput_points.Add(deltaTime, mlp_Output);
-
-            msqError_points.Add(deltaTime, mse);
+            desiredOutput_points.Add(1, desired_Output);
+            mlpOutput_points.Add(1, mlp_Output);
 
             ratesGraph.AxisChange();
             ratesGraph.Invalidate();
 
+        }
+
+        //change MSE
+        public void updateMSE(double mse)
+        {
+            msqError_points.Add(1, mse);
+
             meansGraph.AxisChange();
             meansGraph.Invalidate();
+
         }
 
 
@@ -117,50 +134,71 @@ namespace GraphDisplay
         //radio buttons "selected" event handlers------------------------------------------
         private void fn_linearradio_CheckedChanged(object sender, EventArgs e)
         {
-            chosenRadio = "linear";
+            RadioButton rdb = (RadioButton)sender;
+            if (rdb.Checked)
+            {
+                chosenRadio = "1in_linear";
+            }
         }
 
         private void fn_cubicradio_CheckedChanged(object sender, EventArgs e)
         {
-            chosenRadio = "cubic";
+            RadioButton rdb = (RadioButton)sender;
+            if (rdb.Checked)
+            {
+                chosenRadio = "1in_cubic";
+            }
         }
 
         private void fn_sineradio_CheckedChanged(object sender, EventArgs e)
         {
-            chosenRadio = "sine";
+            RadioButton rdb = (RadioButton)sender;
+            if (rdb.Checked)
+            {
+                chosenRadio = "1in_sine";
+            }
         }
 
         private void fn_tanhradio_CheckedChanged(object sender, EventArgs e)
         {
-            chosenRadio = "tanh";
+            RadioButton rdb = (RadioButton)sender;
+            if (rdb.Checked)
+            {
+                chosenRadio = "1in_tanh";
+            }
         }
 
         private void fn_xorradio_CheckedChanged(object sender, EventArgs e)
         {
-            chosenRadio = "xor";
+            RadioButton rdb = (RadioButton)sender;
+            if (rdb.Checked)
+            {
+                chosenRadio = "2in_xor";
+            }
         }
 
         private void fn_complexradio_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton rdb = (RadioButton)sender;
+            Debug.WriteLine(rdb.Name);
             if (rdb.Checked)
             {
-                chosenRadio = "complex";
+                chosenRadio = "2in_complex";
                 
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void fetchTextBoxesData()
         {
-
+            pop_size = Int32.Parse((this.Controls.Find("input_popsize", true).FirstOrDefault() as TextBox).Text);
+            noOfIterations = Int32.Parse((this.Controls.Find("input_numofiterations", true).FirstOrDefault() as TextBox).Text);
+            double mutRate = Double.Parse((this.Controls.Find("input_mutationrate", true).FirstOrDefault() as TextBox).Text);
+            double crossoverRate = Double.Parse((this.Controls.Find("input_crossoverRate", true).FirstOrDefault() as TextBox).Text);
+            int min = Int32.Parse((this.Controls.Find("input_weight_min", true).FirstOrDefault() as TextBox).Text);
+            int max;
         }
 
-        private void label_tickboxes_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void submit_btn_Click(object sender, EventArgs e)
         {
 
         }
