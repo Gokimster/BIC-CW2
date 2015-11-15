@@ -20,10 +20,11 @@ namespace GraphDisplay
         private int maxWeight;
         private bool evolveWeights;
         private bool evolveFunction;
+        private bool useGraph;
         Random r = new Random();
         PerfGraph graph;
 
-        public EvolutionMgr(PerfGraph graph, string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight)
+        public EvolutionMgr(PerfGraph graph, string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight, bool useGraph)
         {
             this.file = file;
             this.popSize = popSize;
@@ -35,6 +36,7 @@ namespace GraphDisplay
             this.evolveFunction = evolveFunction;
             this.evolveWeights = evolveWeights;
             this.graph = graph;
+            this.useGraph = useGraph;
             initMLP();
             calculatePopToEvolve();
             
@@ -68,7 +70,7 @@ namespace GraphDisplay
                 foreach (MLP mlp in mlps)
                 {
                     graph.updateLabel_evolutionary("EA on iteration " + iteration+" training MLP:"+(i+1));
-                    mlp.run(50, graph);
+                    mlp.run(50, graph, useGraph);
                     fitness[i] = mlp.meanSquaredError();
                     mlp.resetMLP();
                     i++;

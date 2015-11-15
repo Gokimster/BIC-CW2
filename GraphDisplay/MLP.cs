@@ -86,7 +86,7 @@ namespace GraphDisplay
 
         //---------MAIN LOOP-------------------//
 
-        public void run(int iterations, PerfGraph graph)
+        public void run(int iterations, PerfGraph graph, bool useGraph)
         {
             for (int i = 0; i < weights.Length; i++)
             {
@@ -113,15 +113,21 @@ namespace GraphDisplay
 
                     changeOutputWeights(j);
                     changeInputWeights(j);
-                    graph.updateRates(inputs[j].expectedOutput, inputs[j].output);
-                    //Console.WriteLine(inputs[j].error);
-                    if (Math.Abs(inputs[j].error) > 0.01)
+                    if (useGraph)
+                    {
+                        graph.updateRates(inputs[j].expectedOutput, inputs[j].output);
+                        //Console.WriteLine(inputs[j].error);
+                    }
+                        if (Math.Abs(inputs[j].error) > 0.01)
                     {
                         done = false;
                     }
                 }
 
-                graph.updateMSE(meanSquaredError());
+                if (useGraph)
+                {
+                    graph.updateMSE(meanSquaredError());
+                }
                 if (done)
                 {
                     break;
