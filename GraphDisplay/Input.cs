@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphDisplay
 {
+    [Serializable]
     public class Input
     {
         public double[] input { get; set; }

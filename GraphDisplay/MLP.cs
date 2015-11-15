@@ -5,6 +5,7 @@ using System.IO;
 
 namespace GraphDisplay
 {
+    [Serializable]
     public class MLP
     {
         public List<Input> inputs { get; set; }
@@ -22,7 +23,6 @@ namespace GraphDisplay
         //the weights
         public double[] weights;
         public double[] weightChanges;
-        PerfGraph graph;
 
         public void initNodes()
         {
@@ -74,9 +74,8 @@ namespace GraphDisplay
             }
         }
 
-        public MLP(PerfGraph graph, String file, int minWeight, int maxWeight)
+        public MLP(String file, int minWeight, int maxWeight)
         {
-            this.graph = graph;
             initWeightIntervals(minWeight, maxWeight);
             initInput(1, "..\\..\\"+file+".txt");
             initNodes();
@@ -87,9 +86,9 @@ namespace GraphDisplay
 
         //---------MAIN LOOP-------------------//
 
-        public void run(int iterations)
+        public void run(int iterations, PerfGraph graph)
         {
-            for(int i = 0; i < weights.Length; i++)
+            for (int i = 0; i < weights.Length; i++)
             {
                 initialWeights[i] = weights[i];
             }
@@ -103,7 +102,8 @@ namespace GraphDisplay
             for(int i = 0; i < iterations; i ++)
             {
                 bool done = true;
-                for(int j = 0; (j<inputs.Count); j++)
+                graph.updateLabel_individual("MLP on epoch:" + i);
+                for (int j = 0; (j<inputs.Count); j++)
                 {
                     setNodeOutputs(j);
                     setOutput(j);
@@ -113,7 +113,7 @@ namespace GraphDisplay
 
                     changeOutputWeights(j);
                     changeInputWeights(j);
-                    graph.updateRates(inputs[j].expectedOutput, inputs[j].result);
+                    graph.updateRates(inputs[j].expectedOutput, inputs[j].output);
                     //Console.WriteLine(inputs[j].error);
                     if (Math.Abs(inputs[j].error) > 0.01)
                     {

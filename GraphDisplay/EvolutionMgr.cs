@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using MoreLinq;
 using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace GraphDisplay
 {
@@ -43,7 +45,7 @@ namespace GraphDisplay
             mlps = new List<MLP>();
             for(int i = 0; i<popSize; i++)
             {
-                mlps.Add(new MLP(graph, file, minWeight, maxWeight));
+                mlps.Add(new MLP(file, minWeight, maxWeight));
                 System.Threading.Thread.Sleep(20);
             }
             Console.WriteLine("done");
@@ -51,7 +53,7 @@ namespace GraphDisplay
 
         private void calculatePopToEvolve()
         {
-            evolvePopSize = (popSize / 2) * 2;
+            evolvePopSize = (popSize / 4) * 2;
         }
 
         public void run()
@@ -59,12 +61,14 @@ namespace GraphDisplay
             int iteration = 0;
             while (iteration < iterations)
             {
+                graph.updateLabel_evolutionary("EA on iteration " + iteration);
                 double[] fitness = new double[mlps.Count];
                 //double[,] outputs = 
                 int i = 0;
                 foreach (MLP mlp in mlps)
                 {
-                    mlp.run(50);
+                    graph.updateLabel_evolutionary("EA on iteration " + iteration+" training MLP:"+(i+1));
+                    mlp.run(50, graph);
                     fitness[i] = mlp.meanSquaredError();
                     mlp.resetMLP();
                     i++;
@@ -82,10 +86,11 @@ namespace GraphDisplay
                         converged = false;
                     }
                 }
-
+                graph.updateLabel_evolutionary("EA on iteration " + iteration+ " min MSE:" + minSquaredError);
                 if (converged)
                 {
-                    Console.WriteLine("CONVERGED after :" +iteration+ " iterations");
+                    graph.updateLabel_evolutionary("CONVERGED after :" +iteration+ " iterations with MSE:" + minSquaredError);
+                    graph.updateLabel_individual("");
                     break;
                 }
                 //get the top and bottom population
@@ -127,7 +132,7 @@ namespace GraphDisplay
                 temp.Clear();
                 foreach (KeyValuePair<double, MLP> kvp in evolvingMLP)
                 {
-                    temp.Add(kvp.Value);
+                    temp.Add(DeepClone(kvp.Value));
                 }
                 //add the evolved mlps to the population
                 List<MLP> evolved = evolvePop(temp);
@@ -136,6 +141,18 @@ namespace GraphDisplay
                     mlps.Add(m);
                 }
                 iteration++;
+            }
+        }
+
+        public static MLP DeepClone<MLP>(MLP obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (MLP)formatter.Deserialize(ms);
             }
         }
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphDisplay
 {
+    [Serializable]
     public class Node
     {
         public double[] weights { get; set; }

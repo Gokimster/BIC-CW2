@@ -12,6 +12,7 @@ using System.Diagnostics;
 
 namespace GraphDisplay
 {
+
     public partial class PerfGraph : Form
     {
 
@@ -141,12 +142,18 @@ namespace GraphDisplay
 
         public void updateLabel_evolutionary(String input)
         {
-            (this.Controls.Find("evolution_Stage", true).FirstOrDefault() as TextBox).Text = input;
+            Invoke(new Action(() =>
+            {
+                evolution_Stage.Text = input;
+            }));
         }
 
         public void updateLabel_individual(String input)
         {
-            (this.Controls.Find("individual_MLP_stage", true).FirstOrDefault() as TextBox).Text = input;
+            Invoke(new Action(() =>
+            {
+                individual_MLP_stage.Text = input;
+            }));
         }
 
         //radio buttons "selected" event handlers------------------------------------------
