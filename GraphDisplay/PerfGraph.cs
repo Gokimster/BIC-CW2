@@ -15,6 +15,7 @@ namespace GraphDisplay
     public partial class PerfGraph : Form
     {
 
+        private EvolutionMgr evmgr;
         public GraphPane ratesGraph_pane;
         public GraphPane meansGraph_pane;
         RollingPointPairList desiredOutput_points = new RollingPointPairList(22);
@@ -28,7 +29,7 @@ namespace GraphDisplay
         public double deltaTime = 0;
 
 
-        String chosenRadio;
+        String chosenRadio="";
         bool checked_EvolveWeights = false;
         bool checked_EvolveFunction = false;
 
@@ -42,6 +43,7 @@ namespace GraphDisplay
 
         public PerfGraph()
         {
+
             InitializeComponent();
         }
 
@@ -188,19 +190,30 @@ namespace GraphDisplay
             }
         }
 
+        private void checked_weights_CheckedChanged(object sender, EventArgs e)
+        {
+            checked_EvolveWeights = true;
+        }
+
+        private void checked_activationfn_CheckedChanged(object sender, EventArgs e)
+        {
+            checked_EvolveFunction = true;
+        }
+
         private void fetchTextBoxesData()
         {
             pop_size = Int32.Parse((this.Controls.Find("input_popsize", true).FirstOrDefault() as TextBox).Text);
             noOfIterations = Int32.Parse((this.Controls.Find("input_numofiterations", true).FirstOrDefault() as TextBox).Text);
-            double mutRate = Double.Parse((this.Controls.Find("input_mutationrate", true).FirstOrDefault() as TextBox).Text);
-            double crossoverRate = Double.Parse((this.Controls.Find("input_crossoverRate", true).FirstOrDefault() as TextBox).Text);
-            int min = Int32.Parse((this.Controls.Find("input_weight_min", true).FirstOrDefault() as TextBox).Text);
-            int max;
+            mutRate = Double.Parse((this.Controls.Find("input_mutationrate", true).FirstOrDefault() as TextBox).Text);
+            crossoverRate = Double.Parse((this.Controls.Find("input_crossoverRate", true).FirstOrDefault() as TextBox).Text);
+            min = Int32.Parse((this.Controls.Find("input_weight_min", true).FirstOrDefault() as TextBox).Text);
+            max = Int32.Parse((this.Controls.Find("input_weight_min", true).FirstOrDefault() as TextBox).Text);
         }
 
         private void submit_btn_Click(object sender, EventArgs e)
         {
-
+            //TODO check if either is null
+            evmgr = new EvolutionMgr(this, chosenRadio, checked_EvolveWeights, checked_EvolveFunction, pop_size, noOfIterations, mutRate, crossoverRate, min, max);
         }
 
         //---------------------------------------------------------------------------------
