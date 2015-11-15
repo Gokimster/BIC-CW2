@@ -57,6 +57,8 @@
             this.fn_sineradio = new System.Windows.Forms.RadioButton();
             this.fn_cubicradio = new System.Windows.Forms.RadioButton();
             this.fn_linearradio = new System.Windows.Forms.RadioButton();
+            this.individual_MLP_stage = new System.Windows.Forms.Label();
+            this.evolution_Stage = new System.Windows.Forms.Label();
             this.paramsInputContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +86,7 @@
             // meansGraph
             // 
             this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.meansGraph.Location = new System.Drawing.Point(12, 329);
+            this.meansGraph.Location = new System.Drawing.Point(12, 356);
             this.meansGraph.Name = "meansGraph";
             this.meansGraph.ScrollGrace = 0D;
             this.meansGraph.ScrollMaxX = 0D;
@@ -127,7 +129,7 @@
             this.paramsInputContainer.Controls.Add(this.fn_linearradio);
             this.paramsInputContainer.Location = new System.Drawing.Point(677, 12);
             this.paramsInputContainer.Name = "paramsInputContainer";
-            this.paramsInputContainer.Size = new System.Drawing.Size(254, 586);
+            this.paramsInputContainer.Size = new System.Drawing.Size(254, 613);
             this.paramsInputContainer.TabIndex = 2;
             // 
             // submit_btn
@@ -296,7 +298,6 @@
             this.label_tickboxes.Size = new System.Drawing.Size(164, 22);
             this.label_tickboxes.TabIndex = 7;
             this.label_tickboxes.Text = "Parameters to evolve";
-            
             // 
             // label_selectRadio
             // 
@@ -398,11 +399,33 @@
             this.fn_linearradio.UseVisualStyleBackColor = true;
             this.fn_linearradio.CheckedChanged += new System.EventHandler(this.fn_linearradio_CheckedChanged);
             // 
+            // individual_MLP_stage
+            // 
+            this.individual_MLP_stage.AutoSize = true;
+            this.individual_MLP_stage.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.individual_MLP_stage.Location = new System.Drawing.Point(430, 315);
+            this.individual_MLP_stage.Name = "individual_MLP_stage";
+            this.individual_MLP_stage.Size = new System.Drawing.Size(0, 23);
+            this.individual_MLP_stage.TabIndex = 3;
+            this.individual_MLP_stage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // evolution_Stage
+            // 
+            this.evolution_Stage.AutoSize = true;
+            this.evolution_Stage.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.evolution_Stage.Location = new System.Drawing.Point(60, 318);
+            this.evolution_Stage.Name = "evolution_Stage";
+            this.evolution_Stage.Size = new System.Drawing.Size(0, 23);
+            this.evolution_Stage.TabIndex = 4;
+            this.evolution_Stage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // PerfGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 610);
+            this.ClientSize = new System.Drawing.Size(943, 637);
+            this.Controls.Add(this.evolution_Stage);
+            this.Controls.Add(this.individual_MLP_stage);
             this.Controls.Add(this.paramsInputContainer);
             this.Controls.Add(this.meansGraph);
             this.Controls.Add(this.ratesGraph);
@@ -412,6 +435,7 @@
             this.paramsInputContainer.ResumeLayout(false);
             this.paramsInputContainer.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -445,5 +469,7 @@
         private System.Windows.Forms.TextBox input_weight_max;
         private System.Windows.Forms.TextBox input_weight_min;
         private System.Windows.Forms.Button submit_btn;
+        private System.Windows.Forms.Label individual_MLP_stage;
+        private System.Windows.Forms.Label evolution_Stage;
     }
 }

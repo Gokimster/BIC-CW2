@@ -139,7 +139,15 @@ namespace GraphDisplay
 
         }
 
+        public void updateLabel_evolutionary(String input)
+        {
+            (this.Controls.Find("evolution_Stage", true).FirstOrDefault() as TextBox).Text = input;
+        }
 
+        public void updateLabel_individual(String input)
+        {
+            (this.Controls.Find("individual_MLP_stage", true).FirstOrDefault() as TextBox).Text = input;
+        }
 
         //radio buttons "selected" event handlers------------------------------------------
         private void fn_linearradio_CheckedChanged(object sender, EventArgs e)
