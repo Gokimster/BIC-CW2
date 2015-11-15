@@ -20,6 +20,16 @@ namespace BIC_CW2
         private bool evolveFunction;
         Random r = new Random();
 
+        public EventHandler UpdateGraph;
+
+        public void updateGraph(double expectedO, double actualO, double mse)
+        {
+            if (this.UpdateGraph != null)
+            {
+                this.UpdateGraph(this, new EventArgs());
+            }
+        }
+
         public EvolutionMgr(string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight)
         {
             this.file = file;
@@ -62,7 +72,6 @@ namespace BIC_CW2
                 {
                     mlp.run(50);
                     fitness[i++] = mlp.meanSquaredError();
-                    //Console.WriteLine(mlp.meanSquaredError());
                     mlp.resetMLP();
                 }
                 bool converged = true;
@@ -78,7 +87,6 @@ namespace BIC_CW2
                         converged = false;
                     }
                 }
-                Console.WriteLine(minSquaredError);
 
                 if (converged)
                 {
