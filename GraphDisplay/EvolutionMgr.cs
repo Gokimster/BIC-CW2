@@ -51,7 +51,7 @@ namespace GraphDisplay
 
         private void calculatePopToEvolve()
         {
-            evolvePopSize = (popSize / 6) * 2;
+            evolvePopSize = (popSize / 2) * 2;
         }
 
         public void run()

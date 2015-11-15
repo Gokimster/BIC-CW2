@@ -435,7 +435,7 @@ namespace GraphDisplay
             double sum = 0;
             for (int j = 0; (j < inputs.Count); j++)
             {
-                sum += Math.Pow(inputs[j].expectedOutput - inputs[j].result, 2);
+                sum += Math.Pow(inputs[j].expectedOutput - inputs[j].output, 2);
             }
             return sum / (2 * inputs.Count);
         }
