@@ -68,12 +68,12 @@ namespace GraphDisplay
 
             // Set the Titles
             ratesGraph_pane.Title.Text = "Desired vs MLP's output";
-            ratesGraph_pane.XAxis.Title.Text = "x";
-            ratesGraph_pane.YAxis.Title.Text = "y";
+            ratesGraph_pane.XAxis.Title.Text = "input";
+            ratesGraph_pane.YAxis.Title.Text = "result";
 
-            meansGraph_pane.Title.Text = "Means Squared Error";
-            meansGraph_pane.XAxis.Title.Text = "x";
-            meansGraph_pane.YAxis.Title.Text = "y";
+            meansGraph_pane.Title.Text = "Mean Squared Error";
+            meansGraph_pane.XAxis.Title.Text = "epoch";
+            meansGraph_pane.YAxis.Title.Text = "value";
 
             desiredOutput_line = ratesGraph_pane.AddCurve("Desired Output",
                   desiredOutput_points, Color.Red, SymbolType.Circle);
