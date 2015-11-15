@@ -15,6 +15,8 @@ namespace GraphDisplay
     public partial class PerfGraph : Form
     {
 
+        private int interval_rates = 0;
+        private int interval_mse = 0;
         private EvolutionMgr evmgr;
         public GraphPane ratesGraph_pane;
         public GraphPane meansGraph_pane;
@@ -39,12 +41,15 @@ namespace GraphDisplay
         double crossoverRate;
         int min;
         int max;
+        BackgroundWorker worker;
 
 
         public PerfGraph()
         {
 
             InitializeComponent();
+            worker = new BackgroundWorker();
+            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
         }
 
 
@@ -113,21 +118,24 @@ namespace GraphDisplay
         //update graph with new values
         public void updateRates(double desired_Output, double mlp_Output)
         {
-            desiredOutput_points.Add(1, desired_Output);
-            mlpOutput_points.Add(1, mlp_Output);
+            desiredOutput_points.Add(interval_rates, desired_Output);
+            mlpOutput_points.Add(interval_rates, mlp_Output);
 
             ratesGraph.AxisChange();
             ratesGraph.Invalidate();
+            interval_rates += 1;
 
         }
 
         //change MSE
         public void updateMSE(double mse)
         {
-            msqError_points.Add(1, mse);
+            msqError_points.Add(interval_mse, mse);
 
             meansGraph.AxisChange();
             meansGraph.Invalidate();
+
+            interval_mse += 1;
 
         }
 
@@ -170,7 +178,7 @@ namespace GraphDisplay
             }
         }
 
-        private void fn_xorradio_CheckedChanged(object sender, EventArgs e)
+        private void radfn_xorradio_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton rdb = (RadioButton)sender;
             if (rdb.Checked)
@@ -192,12 +200,16 @@ namespace GraphDisplay
 
         private void checked_weights_CheckedChanged(object sender, EventArgs e)
         {
-            checked_EvolveWeights = true;
+            if (checked_EvolveWeights == false)
+            { checked_EvolveWeights = true; }
+            else checked_EvolveWeights = false;
         }
 
         private void checked_activationfn_CheckedChanged(object sender, EventArgs e)
         {
-            checked_EvolveFunction = true;
+            if (checked_EvolveFunction == false)
+            { checked_EvolveFunction = true; }
+            else checked_EvolveFunction = false;
         }
 
         private void fetchTextBoxesData()
@@ -215,6 +227,11 @@ namespace GraphDisplay
             //TODO check if either is null
             fetchTextBoxesData();
             evmgr = new EvolutionMgr(this, chosenRadio, checked_EvolveWeights, checked_EvolveFunction, pop_size, noOfIterations, mutRate, crossoverRate, min, max);
+            worker.RunWorkerAsync();
+        }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
             evmgr.run();
         }
 

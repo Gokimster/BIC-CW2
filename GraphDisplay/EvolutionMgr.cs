@@ -32,9 +32,10 @@ namespace GraphDisplay
             this.maxWeight = maxWeight;
             this.evolveFunction = evolveFunction;
             this.evolveWeights = evolveWeights;
+            this.graph = graph;
             initMLP();
             calculatePopToEvolve();
-            this.graph = graph;
+            
         }
 
         private void initMLP()

@@ -274,6 +274,7 @@
             this.checked_activationfn.TabIndex = 9;
             this.checked_activationfn.Text = "Activation Function";
             this.checked_activationfn.UseVisualStyleBackColor = true;
+            this.checked_activationfn.CheckedChanged += new System.EventHandler(this.checked_activationfn_CheckedChanged);
             // 
             // checked_weights
             // 
@@ -284,6 +285,7 @@
             this.checked_weights.TabIndex = 8;
             this.checked_weights.Text = "Weights";
             this.checked_weights.UseVisualStyleBackColor = true;
+            this.checked_weights.CheckedChanged += new System.EventHandler(this.checked_weights_CheckedChanged);
             // 
             // label_tickboxes
             // 
@@ -294,6 +296,7 @@
             this.label_tickboxes.Size = new System.Drawing.Size(164, 22);
             this.label_tickboxes.TabIndex = 7;
             this.label_tickboxes.Text = "Parameters to evolve";
+            
             // 
             // label_selectRadio
             // 
@@ -333,6 +336,7 @@
             this.radfn_xorradio.TabStop = true;
             this.radfn_xorradio.Text = "XOR function";
             this.radfn_xorradio.UseVisualStyleBackColor = true;
+            this.radfn_xorradio.CheckedChanged += new System.EventHandler(this.radfn_xorradio_CheckedChanged);
             // 
             // fn_tanhradio
             // 
@@ -347,6 +351,7 @@
             this.fn_tanhradio.TabStop = true;
             this.fn_tanhradio.Text = "Tanh function";
             this.fn_tanhradio.UseVisualStyleBackColor = true;
+            this.fn_tanhradio.CheckedChanged += new System.EventHandler(this.fn_tanhradio_CheckedChanged);
             // 
             // fn_sineradio
             // 
@@ -361,6 +366,7 @@
             this.fn_sineradio.TabStop = true;
             this.fn_sineradio.Text = "Sine function";
             this.fn_sineradio.UseVisualStyleBackColor = true;
+            this.fn_sineradio.CheckedChanged += new System.EventHandler(this.fn_sineradio_CheckedChanged);
             // 
             // fn_cubicradio
             // 
@@ -375,6 +381,7 @@
             this.fn_cubicradio.TabStop = true;
             this.fn_cubicradio.Text = "Cubic function";
             this.fn_cubicradio.UseVisualStyleBackColor = true;
+            this.fn_cubicradio.CheckedChanged += new System.EventHandler(this.fn_cubicradio_CheckedChanged);
             // 
             // fn_linearradio
             // 
@@ -389,6 +396,7 @@
             this.fn_linearradio.TabStop = true;
             this.fn_linearradio.Text = "Linear function";
             this.fn_linearradio.UseVisualStyleBackColor = true;
+            this.fn_linearradio.CheckedChanged += new System.EventHandler(this.fn_linearradio_CheckedChanged);
             // 
             // PerfGraph
             // 
