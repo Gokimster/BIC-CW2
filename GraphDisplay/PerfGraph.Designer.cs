@@ -33,6 +33,8 @@
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.meansGraph = new ZedGraph.ZedGraphControl();
             this.paramsInputContainer = new System.Windows.Forms.Panel();
+            this.label_use_graphs = new System.Windows.Forms.Label();
+            this.checked_useGraphs = new System.Windows.Forms.CheckBox();
             this.submit_btn = new System.Windows.Forms.Button();
             this.input_weight_max = new System.Windows.Forms.TextBox();
             this.input_weight_min = new System.Windows.Forms.TextBox();
@@ -59,19 +61,16 @@
             this.fn_linearradio = new System.Windows.Forms.RadioButton();
             this.individual_MLP_stage = new System.Windows.Forms.Label();
             this.evolution_Stage = new System.Windows.Forms.Label();
-            this.checked_useGraphs = new System.Windows.Forms.CheckBox();
-            this.label_use_graphs = new System.Windows.Forms.Label();
             this.paramsInputContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // ratesGraph
             // 
-            this.ratesGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ratesGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ratesGraph.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ratesGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ratesGraph.Location = new System.Drawing.Point(3, 12);
+            this.ratesGraph.Location = new System.Drawing.Point(3, 2);
             this.ratesGraph.Name = "ratesGraph";
             this.ratesGraph.ScrollGrace = 0D;
             this.ratesGraph.ScrollMaxX = 0D;
@@ -80,7 +79,7 @@
             this.ratesGraph.ScrollMinX = 0D;
             this.ratesGraph.ScrollMinY = 0D;
             this.ratesGraph.ScrollMinY2 = 0D;
-            this.ratesGraph.Size = new System.Drawing.Size(1259, 256);
+            this.ratesGraph.Size = new System.Drawing.Size(1259, 224);
             this.ratesGraph.TabIndex = 0;
             // 
             // UpdateTimer
@@ -90,10 +89,8 @@
             // 
             // meansGraph
             // 
-            this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.meansGraph.Location = new System.Drawing.Point(3, 286);
+            this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.meansGraph.Location = new System.Drawing.Point(3, 247);
             this.meansGraph.Name = "meansGraph";
             this.meansGraph.ScrollGrace = 0D;
             this.meansGraph.ScrollMaxX = 0D;
@@ -102,13 +99,12 @@
             this.meansGraph.ScrollMinX = 0D;
             this.meansGraph.ScrollMinY = 0D;
             this.meansGraph.ScrollMinY2 = 0D;
-            this.meansGraph.Size = new System.Drawing.Size(1259, 257);
+            this.meansGraph.Size = new System.Drawing.Size(1259, 241);
             this.meansGraph.TabIndex = 1;
             // 
             // paramsInputContainer
             // 
-            this.paramsInputContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.paramsInputContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paramsInputContainer.BackColor = System.Drawing.Color.SeaShell;
             this.paramsInputContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -138,10 +134,32 @@
             this.paramsInputContainer.Controls.Add(this.fn_sineradio);
             this.paramsInputContainer.Controls.Add(this.fn_cubicradio);
             this.paramsInputContainer.Controls.Add(this.fn_linearradio);
-            this.paramsInputContainer.Location = new System.Drawing.Point(217, 560);
+            this.paramsInputContainer.Location = new System.Drawing.Point(154, 494);
             this.paramsInputContainer.Name = "paramsInputContainer";
-            this.paramsInputContainer.Size = new System.Drawing.Size(965, 178);
+            this.paramsInputContainer.Size = new System.Drawing.Size(965, 176);
             this.paramsInputContainer.TabIndex = 2;
+            // 
+            // label_use_graphs
+            // 
+            this.label_use_graphs.AutoSize = true;
+            this.label_use_graphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_use_graphs.Location = new System.Drawing.Point(814, 45);
+            this.label_use_graphs.Name = "label_use_graphs";
+            this.label_use_graphs.Size = new System.Drawing.Size(146, 15);
+            this.label_use_graphs.TabIndex = 25;
+            this.label_use_graphs.Text = "* affects execution speed ";
+            // 
+            // checked_useGraphs
+            // 
+            this.checked_useGraphs.AutoSize = true;
+            this.checked_useGraphs.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checked_useGraphs.Location = new System.Drawing.Point(818, 12);
+            this.checked_useGraphs.Name = "checked_useGraphs";
+            this.checked_useGraphs.Size = new System.Drawing.Size(120, 26);
+            this.checked_useGraphs.TabIndex = 24;
+            this.checked_useGraphs.Text = "use graphs *";
+            this.checked_useGraphs.UseVisualStyleBackColor = true;
+            this.checked_useGraphs.CheckedChanged += new System.EventHandler(this.checked_useGraphs_CheckedChanged);
             // 
             // submit_btn
             // 
@@ -420,7 +438,7 @@
             // 
             this.individual_MLP_stage.AutoSize = true;
             this.individual_MLP_stage.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.individual_MLP_stage.Location = new System.Drawing.Point(430, 315);
+            this.individual_MLP_stage.Location = new System.Drawing.Point(407, 203);
             this.individual_MLP_stage.Name = "individual_MLP_stage";
             this.individual_MLP_stage.Size = new System.Drawing.Size(0, 23);
             this.individual_MLP_stage.TabIndex = 3;
@@ -430,40 +448,17 @@
             // 
             this.evolution_Stage.AutoSize = true;
             this.evolution_Stage.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.evolution_Stage.Location = new System.Drawing.Point(60, 318);
+            this.evolution_Stage.Location = new System.Drawing.Point(37, 206);
             this.evolution_Stage.Name = "evolution_Stage";
             this.evolution_Stage.Size = new System.Drawing.Size(0, 23);
             this.evolution_Stage.TabIndex = 4;
             this.evolution_Stage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checked_useGraphs
-            // 
-            this.checked_useGraphs.AutoSize = true;
-            this.checked_useGraphs.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checked_useGraphs.Location = new System.Drawing.Point(818, 12);
-            this.checked_useGraphs.Name = "checked_useGraphs";
-            this.checked_useGraphs.Size = new System.Drawing.Size(120, 26);
-            this.checked_useGraphs.TabIndex = 24;
-            this.checked_useGraphs.Text = "use graphs *";
-            this.checked_useGraphs.UseVisualStyleBackColor = true;
-            this.checked_useGraphs.CheckedChanged += new System.EventHandler(this.checked_useGraphs_CheckedChanged);
-
-            // 
-            // label_use_graphs
-            // 
-            this.label_use_graphs.AutoSize = true;
-            this.label_use_graphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_use_graphs.Location = new System.Drawing.Point(814, 45);
-            this.label_use_graphs.Name = "label_use_graphs";
-            this.label_use_graphs.Size = new System.Drawing.Size(146, 15);
-            this.label_use_graphs.TabIndex = 25;
-            this.label_use_graphs.Text = "* affects execution speed ";
-            // 
             // PerfGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 750);
+            this.ClientSize = new System.Drawing.Size(1264, 682);
             this.Controls.Add(this.evolution_Stage);
             this.Controls.Add(this.individual_MLP_stage);
             this.Controls.Add(this.paramsInputContainer);

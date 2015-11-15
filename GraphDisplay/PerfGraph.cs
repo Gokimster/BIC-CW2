@@ -85,6 +85,7 @@ namespace GraphDisplay
                   msqError_points, Color.Black, SymbolType.Circle);
 
 
+            checked_useGraphs.Checked = true;
             ratesGraph.AxisChange();
             meansGraph.AxisChange();
         }
