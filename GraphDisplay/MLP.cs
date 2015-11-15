@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace BIC_CW2
+namespace GraphDisplay
 {
     public class MLP
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MoreLinq;
 using System.Linq;
 
-namespace BIC_CW2
+namespace GraphDisplay
 {
     public class EvolutionMgr
     {
@@ -30,7 +30,7 @@ namespace BIC_CW2
             }
         }
 
-        public EvolutionMgr(string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight)
+        public EvolutionMgr(PerfGraph graph, string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight)
         {
             this.file = file;
             this.popSize = popSize;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIC_CW2
+namespace GraphDisplay
 {
     public class Input
     {
