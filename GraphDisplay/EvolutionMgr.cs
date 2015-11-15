@@ -19,16 +19,7 @@ namespace GraphDisplay
         private bool evolveWeights;
         private bool evolveFunction;
         Random r = new Random();
-
-        public EventHandler UpdateGraph;
-
-        public void updateGraph(double expectedO, double actualO, double mse)
-        {
-            if (this.UpdateGraph != null)
-            {
-                this.UpdateGraph(this, new EventArgs());
-            }
-        }
+        PerfGraph graph;
 
         public EvolutionMgr(PerfGraph graph, string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight)
         {
@@ -43,6 +34,7 @@ namespace GraphDisplay
             this.evolveWeights = evolveWeights;
             initMLP();
             calculatePopToEvolve();
+            this.graph = graph;
         }
 
         private void initMLP()
@@ -50,7 +42,7 @@ namespace GraphDisplay
             mlps = new List<MLP>();
             for(int i = 0; i<popSize; i++)
             {
-                mlps.Add(new MLP(file, minWeight, maxWeight));
+                mlps.Add(new MLP(graph, file, minWeight, maxWeight));
                 System.Threading.Thread.Sleep(20);
             }
             Console.WriteLine("done");
@@ -67,12 +59,14 @@ namespace GraphDisplay
             while (iteration < iterations)
             {
                 double[] fitness = new double[mlps.Count];
+                //double[,] outputs = 
                 int i = 0;
                 foreach (MLP mlp in mlps)
                 {
                     mlp.run(50);
-                    fitness[i++] = mlp.meanSquaredError();
+                    fitness[i] = mlp.meanSquaredError();
                     mlp.resetMLP();
+                    i++;
                 }
                 bool converged = true;
                 double minSquaredError = 9999;

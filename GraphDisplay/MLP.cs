@@ -22,6 +22,7 @@ namespace GraphDisplay
         //the weights
         public double[] weights;
         public double[] weightChanges;
+        PerfGraph graph;
 
         public void initNodes()
         {
@@ -73,8 +74,9 @@ namespace GraphDisplay
             }
         }
 
-        public MLP(String file, int minWeight, int maxWeight)
+        public MLP(PerfGraph graph, String file, int minWeight, int maxWeight)
         {
+            this.graph = graph;
             initWeightIntervals(minWeight, maxWeight);
             initInput(1, "..\\..\\"+file+".txt");
             initNodes();
@@ -111,6 +113,7 @@ namespace GraphDisplay
 
                     changeOutputWeights(j);
                     changeInputWeights(j);
+                    graph.updateRates(inputs[j].expectedOutput, inputs[j].result);
                     //Console.WriteLine(inputs[j].error);
                     if (Math.Abs(inputs[j].error) > 0.01)
                     {
@@ -118,7 +121,7 @@ namespace GraphDisplay
                     }
                 }
 
-                //Console.WriteLine(meanSquaredError(popSize));
+                graph.updateMSE(meanSquaredError());
                 if (done)
                 {
                     break;
@@ -427,28 +430,14 @@ namespace GraphDisplay
             return Math.Exp(-(x * x / 2));
         }
 
-        private double meanSquaredError(int popSize)
-        {
-            double sum = 0;
-            for (int j = 0; (j < inputs.Count && j < popSize); j++)
-            {
-                sum += Math.Pow(activationFunction(inputs[j].expectedOutput) - inputs[j].output, 2);
-            }
-            if (inputs.Count >= popSize)
-            {
-                return sum / inputs.Count;
-            }
-            else return sum / popSize;
-        }
-
         public double meanSquaredError()
         {
             double sum = 0;
             for (int j = 0; (j < inputs.Count); j++)
             {
-                sum += Math.Pow(activationFunction(inputs[j].expectedOutput) - inputs[j].output, 2);
+                sum += Math.Pow(inputs[j].expectedOutput - inputs[j].result, 2);
             }
-            return sum / inputs.Count;
+            return sum / (2 * inputs.Count);
         }
     }
 }
