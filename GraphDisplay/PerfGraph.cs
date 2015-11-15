@@ -21,9 +21,9 @@ namespace GraphDisplay
         private EvolutionMgr evmgr;
         public GraphPane ratesGraph_pane;
         public GraphPane meansGraph_pane;
-        RollingPointPairList desiredOutput_points = new RollingPointPairList(22);
-        RollingPointPairList mlpOutput_points = new RollingPointPairList(22);
-        RollingPointPairList msqError_points = new RollingPointPairList(22);
+        RollingPointPairList desiredOutput_points = new RollingPointPairList(100);
+        RollingPointPairList mlpOutput_points = new RollingPointPairList(100);
+        RollingPointPairList msqError_points = new RollingPointPairList(100);
 
         LineItem desiredOutput_line;
         LineItem mlpOutput_line;
@@ -56,6 +56,7 @@ namespace GraphDisplay
 
         private void PerfGraph_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             ratesGraph_pane = ratesGraph.GraphPane;
             meansGraph_pane = meansGraph.GraphPane;
 

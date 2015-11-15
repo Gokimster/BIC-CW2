@@ -64,9 +64,11 @@
             // 
             // ratesGraph
             // 
+            this.ratesGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ratesGraph.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ratesGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ratesGraph.Location = new System.Drawing.Point(12, 12);
+            this.ratesGraph.Location = new System.Drawing.Point(3, 12);
             this.ratesGraph.Name = "ratesGraph";
             this.ratesGraph.ScrollGrace = 0D;
             this.ratesGraph.ScrollMaxX = 0D;
@@ -75,7 +77,7 @@
             this.ratesGraph.ScrollMinX = 0D;
             this.ratesGraph.ScrollMinY = 0D;
             this.ratesGraph.ScrollMinY2 = 0D;
-            this.ratesGraph.Size = new System.Drawing.Size(616, 288);
+            this.ratesGraph.Size = new System.Drawing.Size(1259, 256);
             this.ratesGraph.TabIndex = 0;
             // 
             // UpdateTimer
@@ -85,8 +87,8 @@
             // 
             // meansGraph
             // 
-            this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.meansGraph.Location = new System.Drawing.Point(12, 356);
+            this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.meansGraph.Location = new System.Drawing.Point(3, 286);
             this.meansGraph.Name = "meansGraph";
             this.meansGraph.ScrollGrace = 0D;
             this.meansGraph.ScrollMaxX = 0D;
@@ -95,12 +97,13 @@
             this.meansGraph.ScrollMinX = 0D;
             this.meansGraph.ScrollMinY = 0D;
             this.meansGraph.ScrollMinY2 = 0D;
-            this.meansGraph.Size = new System.Drawing.Size(616, 269);
+            this.meansGraph.Size = new System.Drawing.Size(1259, 257);
             this.meansGraph.TabIndex = 1;
             // 
             // paramsInputContainer
             // 
-            this.paramsInputContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.paramsInputContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.paramsInputContainer.BackColor = System.Drawing.Color.SeaShell;
             this.paramsInputContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.paramsInputContainer.Controls.Add(this.submit_btn);
@@ -127,15 +130,15 @@
             this.paramsInputContainer.Controls.Add(this.fn_sineradio);
             this.paramsInputContainer.Controls.Add(this.fn_cubicradio);
             this.paramsInputContainer.Controls.Add(this.fn_linearradio);
-            this.paramsInputContainer.Location = new System.Drawing.Point(677, 12);
+            this.paramsInputContainer.Location = new System.Drawing.Point(217, 570);
             this.paramsInputContainer.Name = "paramsInputContainer";
-            this.paramsInputContainer.Size = new System.Drawing.Size(254, 613);
+            this.paramsInputContainer.Size = new System.Drawing.Size(835, 178);
             this.paramsInputContainer.TabIndex = 2;
             // 
             // submit_btn
             // 
             this.submit_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submit_btn.Location = new System.Drawing.Point(72, 547);
+            this.submit_btn.Location = new System.Drawing.Point(653, 125);
             this.submit_btn.Name = "submit_btn";
             this.submit_btn.Size = new System.Drawing.Size(140, 27);
             this.submit_btn.TabIndex = 23;
@@ -146,7 +149,7 @@
             // input_weight_max
             // 
             this.input_weight_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_weight_max.Location = new System.Drawing.Point(109, 501);
+            this.input_weight_max.Location = new System.Drawing.Point(694, 67);
             this.input_weight_max.Name = "input_weight_max";
             this.input_weight_max.Size = new System.Drawing.Size(49, 22);
             this.input_weight_max.TabIndex = 22;
@@ -155,7 +158,7 @@
             // input_weight_min
             // 
             this.input_weight_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_weight_min.Location = new System.Drawing.Point(109, 477);
+            this.input_weight_min.Location = new System.Drawing.Point(693, 37);
             this.input_weight_min.Name = "input_weight_min";
             this.input_weight_min.Size = new System.Drawing.Size(49, 22);
             this.input_weight_min.TabIndex = 21;
@@ -165,7 +168,7 @@
             // 
             this.label_max.AutoSize = true;
             this.label_max.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_max.Location = new System.Drawing.Point(64, 501);
+            this.label_max.Location = new System.Drawing.Point(649, 67);
             this.label_max.Name = "label_max";
             this.label_max.Size = new System.Drawing.Size(39, 21);
             this.label_max.TabIndex = 20;
@@ -175,7 +178,7 @@
             // 
             this.label_min.AutoSize = true;
             this.label_min.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_min.Location = new System.Drawing.Point(65, 477);
+            this.label_min.Location = new System.Drawing.Point(649, 37);
             this.label_min.Name = "label_min";
             this.label_min.Size = new System.Drawing.Size(38, 21);
             this.label_min.TabIndex = 19;
@@ -185,7 +188,7 @@
             // 
             this.label_weightInterval.AutoSize = true;
             this.label_weightInterval.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_weightInterval.Location = new System.Drawing.Point(33, 447);
+            this.label_weightInterval.Location = new System.Drawing.Point(649, 7);
             this.label_weightInterval.Name = "label_weightInterval";
             this.label_weightInterval.Size = new System.Drawing.Size(125, 22);
             this.label_weightInterval.TabIndex = 18;
@@ -194,7 +197,7 @@
             // input_crossoverRate
             // 
             this.input_crossoverRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_crossoverRate.Location = new System.Drawing.Point(168, 400);
+            this.input_crossoverRate.Location = new System.Drawing.Point(538, 125);
             this.input_crossoverRate.Name = "input_crossoverRate";
             this.input_crossoverRate.Size = new System.Drawing.Size(71, 22);
             this.input_crossoverRate.TabIndex = 17;
@@ -204,7 +207,7 @@
             // 
             this.label_crossoverrate.AutoSize = true;
             this.label_crossoverrate.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_crossoverrate.Location = new System.Drawing.Point(13, 399);
+            this.label_crossoverrate.Location = new System.Drawing.Point(386, 127);
             this.label_crossoverrate.Name = "label_crossoverrate";
             this.label_crossoverrate.Size = new System.Drawing.Size(122, 22);
             this.label_crossoverrate.TabIndex = 16;
@@ -213,7 +216,7 @@
             // input_mutationrate
             // 
             this.input_mutationrate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_mutationrate.Location = new System.Drawing.Point(168, 368);
+            this.input_mutationrate.Location = new System.Drawing.Point(538, 97);
             this.input_mutationrate.Name = "input_mutationrate";
             this.input_mutationrate.Size = new System.Drawing.Size(71, 22);
             this.input_mutationrate.TabIndex = 15;
@@ -223,7 +226,7 @@
             // 
             this.label_mutationrate.AutoSize = true;
             this.label_mutationrate.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_mutationrate.Location = new System.Drawing.Point(12, 368);
+            this.label_mutationrate.Location = new System.Drawing.Point(386, 99);
             this.label_mutationrate.Name = "label_mutationrate";
             this.label_mutationrate.Size = new System.Drawing.Size(117, 22);
             this.label_mutationrate.TabIndex = 14;
@@ -232,7 +235,7 @@
             // input_numofiterations
             // 
             this.input_numofiterations.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_numofiterations.Location = new System.Drawing.Point(168, 336);
+            this.input_numofiterations.Location = new System.Drawing.Point(538, 38);
             this.input_numofiterations.Name = "input_numofiterations";
             this.input_numofiterations.Size = new System.Drawing.Size(71, 22);
             this.input_numofiterations.TabIndex = 13;
@@ -242,7 +245,7 @@
             // 
             this.label_numberofinterations.AutoSize = true;
             this.label_numberofinterations.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_numberofinterations.Location = new System.Drawing.Point(12, 334);
+            this.label_numberofinterations.Location = new System.Drawing.Point(386, 38);
             this.label_numberofinterations.Name = "label_numberofinterations";
             this.label_numberofinterations.Size = new System.Drawing.Size(150, 22);
             this.label_numberofinterations.TabIndex = 12;
@@ -251,7 +254,7 @@
             // input_popsize
             // 
             this.input_popsize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.input_popsize.Location = new System.Drawing.Point(168, 301);
+            this.input_popsize.Location = new System.Drawing.Point(538, 8);
             this.input_popsize.Name = "input_popsize";
             this.input_popsize.Size = new System.Drawing.Size(71, 22);
             this.input_popsize.TabIndex = 11;
@@ -261,7 +264,7 @@
             // 
             this.label_popsize.AutoSize = true;
             this.label_popsize.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_popsize.Location = new System.Drawing.Point(12, 301);
+            this.label_popsize.Location = new System.Drawing.Point(386, 8);
             this.label_popsize.Name = "label_popsize";
             this.label_popsize.Size = new System.Drawing.Size(135, 22);
             this.label_popsize.TabIndex = 10;
@@ -270,7 +273,7 @@
             // checked_activationfn
             // 
             this.checked_activationfn.AutoSize = true;
-            this.checked_activationfn.Location = new System.Drawing.Point(72, 253);
+            this.checked_activationfn.Location = new System.Drawing.Point(220, 58);
             this.checked_activationfn.Name = "checked_activationfn";
             this.checked_activationfn.Size = new System.Drawing.Size(117, 17);
             this.checked_activationfn.TabIndex = 9;
@@ -281,7 +284,7 @@
             // checked_weights
             // 
             this.checked_weights.AutoSize = true;
-            this.checked_weights.Location = new System.Drawing.Point(72, 229);
+            this.checked_weights.Location = new System.Drawing.Point(220, 34);
             this.checked_weights.Name = "checked_weights";
             this.checked_weights.Size = new System.Drawing.Size(65, 17);
             this.checked_weights.TabIndex = 8;
@@ -293,7 +296,7 @@
             // 
             this.label_tickboxes.AutoSize = true;
             this.label_tickboxes.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_tickboxes.Location = new System.Drawing.Point(33, 203);
+            this.label_tickboxes.Location = new System.Drawing.Point(216, 8);
             this.label_tickboxes.Name = "label_tickboxes";
             this.label_tickboxes.Size = new System.Drawing.Size(164, 22);
             this.label_tickboxes.TabIndex = 7;
@@ -303,7 +306,7 @@
             // 
             this.label_selectRadio.AutoSize = true;
             this.label_selectRadio.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_selectRadio.Location = new System.Drawing.Point(24, 23);
+            this.label_selectRadio.Location = new System.Drawing.Point(27, 8);
             this.label_selectRadio.Name = "label_selectRadio";
             this.label_selectRadio.Size = new System.Drawing.Size(183, 22);
             this.label_selectRadio.TabIndex = 6;
@@ -315,7 +318,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fn_complexradio.AutoSize = true;
-            this.fn_complexradio.Location = new System.Drawing.Point(72, 167);
+            this.fn_complexradio.Location = new System.Drawing.Point(75, 152);
             this.fn_complexradio.Name = "fn_complexradio";
             this.fn_complexradio.Size = new System.Drawing.Size(106, 17);
             this.fn_complexradio.TabIndex = 5;
@@ -330,7 +333,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.radfn_xorradio.AutoSize = true;
-            this.radfn_xorradio.Location = new System.Drawing.Point(72, 143);
+            this.radfn_xorradio.Location = new System.Drawing.Point(75, 128);
             this.radfn_xorradio.Name = "radfn_xorradio";
             this.radfn_xorradio.Size = new System.Drawing.Size(89, 17);
             this.radfn_xorradio.TabIndex = 4;
@@ -345,7 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fn_tanhradio.AutoSize = true;
-            this.fn_tanhradio.Location = new System.Drawing.Point(72, 119);
+            this.fn_tanhradio.Location = new System.Drawing.Point(75, 104);
             this.fn_tanhradio.Name = "fn_tanhradio";
             this.fn_tanhradio.Size = new System.Drawing.Size(91, 17);
             this.fn_tanhradio.TabIndex = 3;
@@ -360,7 +363,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fn_sineradio.AutoSize = true;
-            this.fn_sineradio.Location = new System.Drawing.Point(72, 96);
+            this.fn_sineradio.Location = new System.Drawing.Point(75, 81);
             this.fn_sineradio.Name = "fn_sineradio";
             this.fn_sineradio.Size = new System.Drawing.Size(87, 17);
             this.fn_sineradio.TabIndex = 2;
@@ -375,7 +378,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fn_cubicradio.AutoSize = true;
-            this.fn_cubicradio.Location = new System.Drawing.Point(72, 72);
+            this.fn_cubicradio.Location = new System.Drawing.Point(75, 57);
             this.fn_cubicradio.Name = "fn_cubicradio";
             this.fn_cubicradio.Size = new System.Drawing.Size(93, 17);
             this.fn_cubicradio.TabIndex = 1;
@@ -390,7 +393,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.fn_linearradio.AutoSize = true;
-            this.fn_linearradio.Location = new System.Drawing.Point(72, 48);
+            this.fn_linearradio.Location = new System.Drawing.Point(75, 33);
             this.fn_linearradio.Name = "fn_linearradio";
             this.fn_linearradio.Size = new System.Drawing.Size(95, 17);
             this.fn_linearradio.TabIndex = 0;
@@ -423,7 +426,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 637);
+            this.ClientSize = new System.Drawing.Size(1264, 750);
             this.Controls.Add(this.evolution_Stage);
             this.Controls.Add(this.individual_MLP_stage);
             this.Controls.Add(this.paramsInputContainer);
