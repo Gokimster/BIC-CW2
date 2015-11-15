@@ -215,6 +215,7 @@ namespace GraphDisplay
             //TODO check if either is null
             fetchTextBoxesData();
             evmgr = new EvolutionMgr(this, chosenRadio, checked_EvolveWeights, checked_EvolveFunction, pop_size, noOfIterations, mutRate, crossoverRate, min, max);
+            evmgr.run();
         }
 
         //---------------------------------------------------------------------------------
