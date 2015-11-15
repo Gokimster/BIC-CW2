@@ -213,6 +213,7 @@ namespace GraphDisplay
         private void submit_btn_Click(object sender, EventArgs e)
         {
             //TODO check if either is null
+            fetchTextBoxesData();
             evmgr = new EvolutionMgr(this, chosenRadio, checked_EvolveWeights, checked_EvolveFunction, pop_size, noOfIterations, mutRate, crossoverRate, min, max);
         }
 
