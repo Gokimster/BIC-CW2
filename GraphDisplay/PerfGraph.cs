@@ -35,6 +35,7 @@ namespace GraphDisplay
         String chosenRadio="";
         bool checked_EvolveWeights = false;
         bool checked_EvolveFunction = false;
+        bool checked_use_graph = false;
 
         int pop_size;
         int noOfIterations;
@@ -157,6 +158,9 @@ namespace GraphDisplay
             }));
         }
 
+
+
+
         //radio buttons "selected" event handlers------------------------------------------
         private void fn_linearradio_CheckedChanged(object sender, EventArgs e)
         {
@@ -228,6 +232,13 @@ namespace GraphDisplay
             else checked_EvolveFunction = false;
         }
 
+        private void checked_useGraphs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checked_use_graph == false)
+            { checked_use_graph = true; }
+            else checked_use_graph = false;
+        }
+
         private void fetchTextBoxesData()
         {
             pop_size = Int32.Parse((this.Controls.Find("input_popsize", true).FirstOrDefault() as TextBox).Text);
@@ -240,9 +251,9 @@ namespace GraphDisplay
 
         private void submit_btn_Click(object sender, EventArgs e)
         {
-            //TODO check if either is null
+            
             fetchTextBoxesData();
-            evmgr = new EvolutionMgr(this, chosenRadio, checked_EvolveWeights, checked_EvolveFunction, pop_size, noOfIterations, mutRate, crossoverRate, min, max);
+            evmgr = new EvolutionMgr(this, chosenRadio, checked_EvolveWeights, checked_EvolveFunction, pop_size, noOfIterations, mutRate, crossoverRate, min, max, checked_use_graph);
             worker.RunWorkerAsync();
         }
 
@@ -251,7 +262,7 @@ namespace GraphDisplay
             evmgr.run();
         }
 
-        //---------------------------------------------------------------------------------
+       
 
     }
 }

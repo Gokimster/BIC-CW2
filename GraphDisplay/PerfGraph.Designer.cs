@@ -59,12 +59,15 @@
             this.fn_linearradio = new System.Windows.Forms.RadioButton();
             this.individual_MLP_stage = new System.Windows.Forms.Label();
             this.evolution_Stage = new System.Windows.Forms.Label();
+            this.checked_useGraphs = new System.Windows.Forms.CheckBox();
+            this.label_use_graphs = new System.Windows.Forms.Label();
             this.paramsInputContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // ratesGraph
             // 
-            this.ratesGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ratesGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ratesGraph.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ratesGraph.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -87,7 +90,9 @@
             // 
             // meansGraph
             // 
-            this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.meansGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.meansGraph.Location = new System.Drawing.Point(3, 286);
             this.meansGraph.Name = "meansGraph";
             this.meansGraph.ScrollGrace = 0D;
@@ -102,10 +107,13 @@
             // 
             // paramsInputContainer
             // 
-            this.paramsInputContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.paramsInputContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paramsInputContainer.BackColor = System.Drawing.Color.SeaShell;
             this.paramsInputContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paramsInputContainer.Controls.Add(this.label_use_graphs);
+            this.paramsInputContainer.Controls.Add(this.checked_useGraphs);
             this.paramsInputContainer.Controls.Add(this.submit_btn);
             this.paramsInputContainer.Controls.Add(this.input_weight_max);
             this.paramsInputContainer.Controls.Add(this.input_weight_min);
@@ -130,9 +138,9 @@
             this.paramsInputContainer.Controls.Add(this.fn_sineradio);
             this.paramsInputContainer.Controls.Add(this.fn_cubicradio);
             this.paramsInputContainer.Controls.Add(this.fn_linearradio);
-            this.paramsInputContainer.Location = new System.Drawing.Point(217, 570);
+            this.paramsInputContainer.Location = new System.Drawing.Point(217, 560);
             this.paramsInputContainer.Name = "paramsInputContainer";
-            this.paramsInputContainer.Size = new System.Drawing.Size(835, 178);
+            this.paramsInputContainer.Size = new System.Drawing.Size(965, 178);
             this.paramsInputContainer.TabIndex = 2;
             // 
             // submit_btn
@@ -153,6 +161,7 @@
             this.input_weight_max.Name = "input_weight_max";
             this.input_weight_max.Size = new System.Drawing.Size(49, 22);
             this.input_weight_max.TabIndex = 22;
+            this.input_weight_max.Text = "integer";
             this.input_weight_max.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // input_weight_min
@@ -162,6 +171,7 @@
             this.input_weight_min.Name = "input_weight_min";
             this.input_weight_min.Size = new System.Drawing.Size(49, 22);
             this.input_weight_min.TabIndex = 21;
+            this.input_weight_min.Text = "integer";
             this.input_weight_min.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label_max
@@ -201,6 +211,7 @@
             this.input_crossoverRate.Name = "input_crossoverRate";
             this.input_crossoverRate.Size = new System.Drawing.Size(71, 22);
             this.input_crossoverRate.TabIndex = 17;
+            this.input_crossoverRate.Text = "float.point";
             this.input_crossoverRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label_crossoverrate
@@ -220,6 +231,7 @@
             this.input_mutationrate.Name = "input_mutationrate";
             this.input_mutationrate.Size = new System.Drawing.Size(71, 22);
             this.input_mutationrate.TabIndex = 15;
+            this.input_mutationrate.Text = "float.point";
             this.input_mutationrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label_mutationrate
@@ -239,6 +251,7 @@
             this.input_numofiterations.Name = "input_numofiterations";
             this.input_numofiterations.Size = new System.Drawing.Size(71, 22);
             this.input_numofiterations.TabIndex = 13;
+            this.input_numofiterations.Text = "integer";
             this.input_numofiterations.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label_numberofinterations
@@ -258,6 +271,7 @@
             this.input_popsize.Name = "input_popsize";
             this.input_popsize.Size = new System.Drawing.Size(71, 22);
             this.input_popsize.TabIndex = 11;
+            this.input_popsize.Text = "integer";
             this.input_popsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label_popsize
@@ -422,6 +436,29 @@
             this.evolution_Stage.TabIndex = 4;
             this.evolution_Stage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // checked_useGraphs
+            // 
+            this.checked_useGraphs.AutoSize = true;
+            this.checked_useGraphs.Font = new System.Drawing.Font("Palatino Linotype", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checked_useGraphs.Location = new System.Drawing.Point(818, 12);
+            this.checked_useGraphs.Name = "checked_useGraphs";
+            this.checked_useGraphs.Size = new System.Drawing.Size(120, 26);
+            this.checked_useGraphs.TabIndex = 24;
+            this.checked_useGraphs.Text = "use graphs *";
+            this.checked_useGraphs.UseVisualStyleBackColor = true;
+            this.checked_useGraphs.CheckedChanged += new System.EventHandler(this.checked_useGraphs_CheckedChanged);
+
+            // 
+            // label_use_graphs
+            // 
+            this.label_use_graphs.AutoSize = true;
+            this.label_use_graphs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_use_graphs.Location = new System.Drawing.Point(814, 45);
+            this.label_use_graphs.Name = "label_use_graphs";
+            this.label_use_graphs.Size = new System.Drawing.Size(146, 15);
+            this.label_use_graphs.TabIndex = 25;
+            this.label_use_graphs.Text = "* affects execution speed ";
+            // 
             // PerfGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,5 +511,7 @@
         private System.Windows.Forms.Button submit_btn;
         private System.Windows.Forms.Label individual_MLP_stage;
         private System.Windows.Forms.Label evolution_Stage;
+        private System.Windows.Forms.Label label_use_graphs;
+        private System.Windows.Forms.CheckBox checked_useGraphs;
     }
 }
