@@ -16,6 +16,8 @@ namespace BIC_CW2
         private string file;
         private int minWeight;
         private int maxWeight;
+        private bool evolveWeights;
+        private bool evolveFunction;
         Random r = new Random();
 
         public EvolutionMgr(string file, bool evolveWeights, bool evolveFunction, int popSize, int iterations, double mutationRate, double crossoverRate, int minWeight, int maxWeight)
@@ -27,6 +29,8 @@ namespace BIC_CW2
             this.crossoverRate = crossoverRate;
             this.minWeight = minWeight;
             this.maxWeight = maxWeight;
+            this.evolveFunction = evolveFunction;
+            this.evolveWeights = evolveWeights;
             initMLP();
             calculatePopToEvolve();
         }
@@ -161,27 +165,36 @@ namespace BIC_CW2
             double probability = r.NextDouble();
             if (probability <= crossoverRate)
             {
-                int nodeIndex = r.Next(0, 5);
-                //test swap
-                Node n = m1.nodes[nodeIndex];
-                m1.nodes[nodeIndex] = m2.nodes[nodeIndex];
-                m2.nodes[nodeIndex] = n;
-                double weight = m1.getWeight(nodeIndex);
-                m1.setWeight(nodeIndex, m2.getWeight(nodeIndex));
-                m1.setWeight(nodeIndex, weight);
-                int nodeIndex2 = r.Next(0, 5);
-                while (nodeIndex2 == nodeIndex)
+                if (evolveWeights)
                 {
-                    nodeIndex2 = r.Next(0, 5);
+                    int nodeIndex = r.Next(0, 5);
+                    //test swap
+                    Node n = m1.nodes[nodeIndex];
+                    m1.nodes[nodeIndex] = m2.nodes[nodeIndex];
+                    m2.nodes[nodeIndex] = n;
+                    double weight = m1.getWeight(nodeIndex);
+                    m1.setWeight(nodeIndex, m2.getWeight(nodeIndex));
+                    m1.setWeight(nodeIndex, weight);
+                    int nodeIndex2 = r.Next(0, 5);
+                    while (nodeIndex2 == nodeIndex)
+                    {
+                        nodeIndex2 = r.Next(0, 5);
+                    }
+                    nodeIndex = nodeIndex2;
+                    //test swap
+                    n = m1.nodes[nodeIndex];
+                    m1.nodes[nodeIndex] = m2.nodes[nodeIndex];
+                    m2.nodes[nodeIndex] = n;
+                    weight = m1.getWeight(nodeIndex);
+                    m1.setWeight(nodeIndex, m2.getWeight(nodeIndex));
+                    m1.setWeight(nodeIndex, weight);
                 }
-                nodeIndex = nodeIndex2;
-                //test swap
-                n = m1.nodes[nodeIndex];
-                m1.nodes[nodeIndex] = m2.nodes[nodeIndex];
-                m2.nodes[nodeIndex] = n;
-                weight = m1.getWeight(nodeIndex);
-                m1.setWeight(nodeIndex, m2.getWeight(nodeIndex));
-                m1.setWeight(nodeIndex, weight);
+                if(evolveFunction)
+                {
+                    MLP.Activation a = m1.activation;
+                    m1.activation = m2.activation;
+                    m2.activation = a;
+                }
 
             }
             m1Out = m1;
@@ -193,13 +206,16 @@ namespace BIC_CW2
             double probability = r.NextDouble();
             if (probability <= mutationRate)
             {
-                m.mutateWeights();
-                mOut = m;
+                if (evolveWeights)
+                {
+                    m.mutateWeights();
+                }
+                if(evolveFunction)
+                {
+                    m.mutateFunction();
+                }
             }
-            else
-            {
-                mOut = m;
-            }
+            mOut = m;
         }
     }
 

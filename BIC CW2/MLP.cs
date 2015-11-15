@@ -16,8 +16,8 @@ namespace BIC_CW2
         private int HIDDEN_NODES_NO = 5;
         private int INPUT_NO;
         private double LEARNING_CONSTANT = 0.05;
-        private enum Activation {nullA, sigmoid, tangent, cos, gaussian};
-        private Activation activation;
+        public enum Activation {nullA, sigmoid, tangent, cos, gaussian};
+        public Activation activation {get; set;}
         private Random rand = new Random();
         //the weights
         public double[] weights;
@@ -247,7 +247,9 @@ namespace BIC_CW2
         {
             return rand.NextDouble() + rand.Next(MIN_WEIGHT_INTERVAL, MAX_WEIGHT_INTERVAL - 1);
         }
-
+        /// <summary>
+        /// /MUTATION
+        /// </summary>
         public void mutateWeights()
         {
             foreach(Node n in nodes)
@@ -278,6 +280,17 @@ namespace BIC_CW2
                     setWeight(i, getWeight(i) + (rand.NextDouble() / 10));
                 }
             }
+        }
+
+        public void mutateFunction()
+        {
+            var v = Enum.GetValues(typeof(Activation));
+            Activation a = activation;
+            while(a == activation)
+            {
+                a =(Activation) v.GetValue(rand.Next(v.Length));
+            }
+            activation = a;
         }
 
         public void setWeights(double[] w)
