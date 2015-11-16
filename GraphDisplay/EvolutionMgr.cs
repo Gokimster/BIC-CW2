@@ -95,52 +95,55 @@ namespace GraphDisplay
                     graph.updateLabel_individual("");
                     break;
                 }
-                //get the top and bottom population
-                List<KeyValuePair<double, MLP>> evolvingMLP = new List<KeyValuePair<double, MLP>>();
-                List<KeyValuePair<double, MLP>> removingMLP = new List<KeyValuePair<double, MLP>>();
-                for (i = 0; i < evolvePopSize; i++)
+                if (evolvePopSize > 0)
                 {
-                    evolvingMLP.Add(new KeyValuePair<double, MLP>(fitness[i], mlps[i]));
-                    removingMLP.Add(new KeyValuePair<double, MLP>(fitness[i], mlps[i]));
-                }
-                for (i = evolvePopSize; i < popSize; i++)
-                {
-                    var maxBestFitness = evolvingMLP.MaxBy(kvp => kvp.Key).Key;
-                    var maxBestFitnessPair = evolvingMLP.MaxBy(kvp => kvp.Key);
-                    var minWorstFitness = removingMLP.MinBy(kpv => kpv.Key).Key;
-                    var minWorstFitnessPair = removingMLP.MinBy(kpv => kpv.Key);
-                    if (fitness[i] < maxBestFitness)
+                    //get the top and bottom population
+                    List<KeyValuePair<double, MLP>> evolvingMLP = new List<KeyValuePair<double, MLP>>();
+                    List<KeyValuePair<double, MLP>> removingMLP = new List<KeyValuePair<double, MLP>>();
+                    for (i = 0; i < evolvePopSize; i++)
                     {
-                        evolvingMLP.Remove(maxBestFitnessPair);
-                        evolvingMLP.Add(new KeyValuePair<double,MLP>(fitness[i], mlps[i]));
-                    }
-                    if (fitness[i] > minWorstFitness)
-                    {
-                        removingMLP.Remove(minWorstFitnessPair);
+                        evolvingMLP.Add(new KeyValuePair<double, MLP>(fitness[i], mlps[i]));
                         removingMLP.Add(new KeyValuePair<double, MLP>(fitness[i], mlps[i]));
                     }
-                }
-                //evolve the top population
-                List<MLP> temp = new List<MLP>();
-                foreach(KeyValuePair<double, MLP> kvp in removingMLP)
-                {
-                    temp.Add(kvp.Value);
-                }
-                //remove the population with the bottom fitness
-                foreach (MLP m in temp)
-                {
-                    mlps.Remove(m);
-                }
-                temp.Clear();
-                foreach (KeyValuePair<double, MLP> kvp in evolvingMLP)
-                {
-                    temp.Add(DeepClone(kvp.Value));
-                }
-                //add the evolved mlps to the population
-                List<MLP> evolved = evolvePop(temp);
-                foreach (MLP m in evolved)
-                {
-                    mlps.Add(m);
+                    for (i = evolvePopSize; i < popSize; i++)
+                    {
+                        var maxBestFitness = evolvingMLP.MaxBy(kvp => kvp.Key).Key;
+                        var maxBestFitnessPair = evolvingMLP.MaxBy(kvp => kvp.Key);
+                        var minWorstFitness = removingMLP.MinBy(kpv => kpv.Key).Key;
+                        var minWorstFitnessPair = removingMLP.MinBy(kpv => kpv.Key);
+                        if (fitness[i] < maxBestFitness)
+                        {
+                            evolvingMLP.Remove(maxBestFitnessPair);
+                            evolvingMLP.Add(new KeyValuePair<double, MLP>(fitness[i], mlps[i]));
+                        }
+                        if (fitness[i] > minWorstFitness)
+                        {
+                            removingMLP.Remove(minWorstFitnessPair);
+                            removingMLP.Add(new KeyValuePair<double, MLP>(fitness[i], mlps[i]));
+                        }
+                    }
+                    //evolve the top population
+                    List<MLP> temp = new List<MLP>();
+                    foreach (KeyValuePair<double, MLP> kvp in removingMLP)
+                    {
+                        temp.Add(kvp.Value);
+                    }
+                    //remove the population with the bottom fitness
+                    foreach (MLP m in temp)
+                    {
+                        mlps.Remove(m);
+                    }
+                    temp.Clear();
+                    foreach (KeyValuePair<double, MLP> kvp in evolvingMLP)
+                    {
+                        temp.Add(DeepClone(kvp.Value));
+                    }
+                    //add the evolved mlps to the population
+                    List<MLP> evolved = evolvePop(temp);
+                    foreach (MLP m in evolved)
+                    {
+                        mlps.Add(m);
+                    }
                 }
                 iteration++;
             }
